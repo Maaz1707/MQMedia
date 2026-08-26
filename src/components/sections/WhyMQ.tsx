@@ -4,37 +4,47 @@ import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
 
-const ROWS = [
+type Bar = { label: string; level: number; note: string };
+
+const CATEGORIES: { category: string; bars: Bar[] }[] = [
   {
-    label: "Speed",
-    freelancer: "Inconsistent, often stalls",
-    agency: "Slow, layered approvals",
-    mq: "Fast, founder-driven turnaround",
+    category: "Speed",
+    bars: [
+      { label: "Freelancers", level: 0.35, note: "Inconsistent" },
+      { label: "Large Agencies", level: 0.55, note: "Layered approvals" },
+      { label: "MQ Media", level: 0.95, note: "Founder-driven" },
+    ],
   },
   {
-    label: "Design Quality",
-    freelancer: "Varies project to project",
-    agency: "Consistent, but genericized",
-    mq: "Consistently sharp, never templated",
+    category: "Design Quality",
+    bars: [
+      { label: "Freelancers", level: 0.45, note: "Varies by project" },
+      { label: "Large Agencies", level: 0.65, note: "Consistent, generic" },
+      { label: "MQ Media", level: 0.95, note: "Sharp, never templated" },
+    ],
   },
   {
-    label: "Attention",
-    freelancer: "One person, limited scope",
-    agency: "Passed between account managers",
-    mq: "Direct access to the founder",
+    category: "Attention",
+    bars: [
+      { label: "Freelancers", level: 0.4, note: "Limited scope" },
+      { label: "Large Agencies", level: 0.5, note: "Account managers" },
+      { label: "MQ Media", level: 0.95, note: "Direct founder access" },
+    ],
   },
   {
-    label: "Pricing",
-    freelancer: "Cheap, but unpredictable",
-    agency: "Expensive, retainer-heavy",
-    mq: "Transparent, scoped to the project",
+    category: "Pricing Clarity",
+    bars: [
+      { label: "Freelancers", level: 0.35, note: "Unpredictable" },
+      { label: "Large Agencies", level: 0.55, note: "Retainer-heavy" },
+      { label: "MQ Media", level: 0.95, note: "Transparent & scoped" },
+    ],
   },
 ];
 
 export default function WhyMQ() {
   return (
     <section id="why-mq" className="section-divider bg-background-alt px-6 py-32 md:py-40">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-4xl">
         <Reveal className="text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-gold">
             Why MQ
@@ -44,69 +54,45 @@ export default function WhyMQ() {
           </h2>
         </Reveal>
 
-        {/* Desktop comparison table */}
-        <Reveal delay={0.15} className="mt-16 hidden overflow-x-auto md:block">
-          <table className="w-full min-w-[640px] border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-border text-left">
-                <th className="px-6 py-5 font-normal">&nbsp;</th>
-                <th className="px-6 py-5 text-xs font-normal uppercase tracking-[0.15em] text-muted">
-                  Freelancers
-                </th>
-                <th className="px-6 py-5 text-xs font-normal uppercase tracking-[0.15em] text-muted">
-                  Large Agencies
-                </th>
-                <th className="font-display border-b-2 border-gold px-6 py-5 text-xs font-normal uppercase tracking-[0.15em] text-gold">
-                  MQ Media
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {ROWS.map((row, i) => (
-                <motion.tr
-                  key={row.label}
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  className="border-b border-border transition-colors duration-300 hover:bg-gold/[0.03] last:border-none"
-                >
-                  <td className="px-6 py-6 font-medium text-foreground">
-                    {row.label}
-                  </td>
-                  <td className="px-6 py-6 text-muted">{row.freelancer}</td>
-                  <td className="px-6 py-6 text-muted">{row.agency}</td>
-                  <td className="border-l border-gold/20 px-6 py-6 text-foreground/90">
-                    {row.mq}
-                  </td>
-                </motion.tr>
-              ))}
-            </tbody>
-          </table>
-        </Reveal>
-
-        {/* Mobile stacked cards */}
-        <div className="mt-14 flex flex-col gap-5 md:hidden">
-          {ROWS.map((row, i) => (
-            <Reveal key={row.label} delay={i * 0.08}>
-              <div className="border border-border bg-surface p-6">
-                <p className="font-display text-sm uppercase tracking-[0.15em] text-gold">
-                  {row.label}
-                </p>
-                <dl className="mt-4 flex flex-col gap-3 text-sm">
-                  <div className="flex justify-between gap-4">
-                    <dt className="text-muted">Freelancers</dt>
-                    <dd className="text-right text-foreground/70">{row.freelancer}</dd>
+        <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-2">
+          {CATEGORIES.map((cat, ci) => (
+            <Reveal key={cat.category} delay={ci * 0.1}>
+              <h3 className="font-display text-lg text-foreground">{cat.category}</h3>
+              <div className="mt-5 flex flex-col gap-4">
+                {cat.bars.map((bar, i) => (
+                  <div key={bar.label}>
+                    <div className="flex items-baseline justify-between text-xs">
+                      <span
+                        className={
+                          bar.label === "MQ Media"
+                            ? "font-medium uppercase tracking-[0.1em] text-gold"
+                            : "uppercase tracking-[0.1em] text-muted"
+                        }
+                      >
+                        {bar.label}
+                      </span>
+                      <span className="text-muted">{bar.note}</span>
+                    </div>
+                    <div className="mt-1.5 h-1.5 w-full overflow-hidden bg-border/60">
+                      <motion.div
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: bar.level }}
+                        viewport={{ once: true, margin: "-60px" }}
+                        transition={{
+                          duration: 0.9,
+                          delay: ci * 0.1 + i * 0.12,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                        style={{ transformOrigin: "left" }}
+                        className={`h-full ${
+                          bar.label === "MQ Media"
+                            ? "bg-gradient-to-r from-gold-dark via-gold to-gold-light"
+                            : "bg-muted/50"
+                        }`}
+                      />
+                    </div>
                   </div>
-                  <div className="flex justify-between gap-4">
-                    <dt className="text-muted">Large Agencies</dt>
-                    <dd className="text-right text-foreground/70">{row.agency}</dd>
-                  </div>
-                  <div className="flex justify-between gap-4 border-t border-gold/30 pt-3">
-                    <dt className="font-medium text-gold">MQ Media</dt>
-                    <dd className="text-right text-foreground/90">{row.mq}</dd>
-                  </div>
-                </dl>
+                ))}
               </div>
             </Reveal>
           ))}

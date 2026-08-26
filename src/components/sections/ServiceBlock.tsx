@@ -3,9 +3,11 @@
 import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import TiltCard from "@/components/TiltCard";
+import { SERVICE_ICON_MAP, type ServiceIconKey } from "@/components/Icons";
 
 type ServiceBlockProps = {
   index: string;
+  icon: ServiceIconKey;
   title: string;
   description: string;
   includes: string[];
@@ -15,12 +17,15 @@ type ServiceBlockProps = {
 
 export default function ServiceBlock({
   index,
+  icon,
   title,
   description,
   includes,
   outcome,
   reversed = false,
 }: ServiceBlockProps) {
+  const Icon = SERVICE_ICON_MAP[icon];
+
   return (
     <div
       className={`section-divider mx-auto grid max-w-6xl grid-cols-1 items-center gap-14 px-6 py-24 md:grid-cols-2 ${
@@ -35,7 +40,8 @@ export default function ServiceBlock({
             className="bg-noise group relative flex aspect-square items-center justify-center overflow-hidden border border-border transition-colors duration-500 hover:border-gold/50"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-gold/[0.06] via-transparent to-transparent transition-opacity duration-500 group-hover:from-gold/[0.12]" />
-            <span className="font-display text-gold-dark/40 relative text-9xl transition-transform duration-700 ease-out group-hover:scale-105">
+            <Icon className="relative h-24 w-24 text-gold transition-transform duration-700 ease-out group-hover:scale-110 md:h-32 md:w-32" />
+            <span className="font-display absolute bottom-6 right-6 text-sm text-gold-dark/60">
               {index}
             </span>
           </div>
@@ -51,21 +57,20 @@ export default function ServiceBlock({
           {description}
         </p>
 
-        <ul className="mt-7 flex flex-col gap-3">
+        <div className="mt-7 grid grid-cols-2 gap-3">
           {includes.map((item, i) => (
-            <motion.li
+            <motion.span
               key={item}
-              initial={{ opacity: 0, x: -10 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="flex items-start gap-3 text-sm text-foreground/90 md:text-base"
+              transition={{ duration: 0.4, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              className="border border-border px-3 py-2.5 text-center text-xs text-foreground/80 md:text-sm"
             >
-              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
               {item}
-            </motion.li>
+            </motion.span>
           ))}
-        </ul>
+        </div>
 
         <p className="mt-7 border-l-2 border-gold/50 pl-4 text-base italic leading-relaxed text-gold-light">
           {outcome}

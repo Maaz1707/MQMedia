@@ -4,31 +4,32 @@ import { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
+import { DiscoveryIcon, DesignIcon, BuildIcon, LaunchIcon } from "@/components/Icons";
 
 const STEPS = [
   {
     number: "01",
+    icon: DiscoveryIcon,
     title: "Discovery",
-    description:
-      "We learn your business, your buyers and your competitors before a single pixel moves — so the work is built on strategy, not guesswork.",
+    description: "Understand your business, buyers and competitors.",
   },
   {
     number: "02",
+    icon: DesignIcon,
     title: "Design",
-    description:
-      "Concepts and direction, developed with the founder directly on every project. You review real design decisions, not vague moodboards.",
+    description: "Real direction from the founder, not a moodboard.",
   },
   {
     number: "03",
+    icon: BuildIcon,
     title: "Build",
-    description:
-      "Sites get engineered, catalogues get produced, campaigns get set up — all to production quality, tested before it ever reaches you.",
+    description: "Engineered and produced to production quality.",
   },
   {
     number: "04",
+    icon: LaunchIcon,
     title: "Launch & Grow",
-    description:
-      "We ship it, then stay on it. SEO and social work continues after launch so the result compounds instead of fading.",
+    description: "We stay on it so the result compounds after launch.",
   },
 ];
 
@@ -56,32 +57,35 @@ export default function Process() {
           </h2>
         </Reveal>
 
-        <div ref={timelineRef} className="relative mt-20 grid grid-cols-1 gap-12 md:grid-cols-4">
+        <div ref={timelineRef} className="relative mt-20 grid grid-cols-1 gap-14 md:grid-cols-4">
           <div
             aria-hidden="true"
-            className="absolute left-0 right-0 top-8 hidden h-px bg-border md:block"
+            className="absolute left-0 right-0 top-10 hidden h-px bg-border md:block"
           />
           <motion.div
             aria-hidden="true"
             style={{ scaleX: lineScale }}
-            className="absolute left-0 right-0 top-8 hidden h-px origin-left bg-gradient-to-r from-gold-dark via-gold to-gold-light md:block"
+            className="absolute left-0 right-0 top-10 hidden h-px origin-left bg-gradient-to-r from-gold-dark via-gold to-gold-light md:block"
           />
           {STEPS.map((step, i) => (
             <Reveal key={step.number} delay={i * 0.1}>
-              <div className="relative flex flex-col items-center text-center md:items-start md:text-left">
+              <div className="relative flex flex-col items-center text-center">
                 <motion.span
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
+                  initial={{ scale: 0.5, opacity: 0, rotate: -8 }}
+                  whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ type: "spring", stiffness: 260, damping: 18, delay: i * 0.1 }}
-                  className="font-display text-gradient-gold relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-gold/40 bg-background text-xl"
+                  transition={{ type: "spring", stiffness: 240, damping: 18, delay: i * 0.1 }}
+                  className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full border border-gold/40 bg-background"
                 >
-                  {step.number}
+                  <step.icon className="h-8 w-8 text-gold" />
                 </motion.span>
-                <h3 className="font-display mt-6 text-xl text-foreground">
+                <span className="font-display mt-4 text-xs text-gold-dark">
+                  {step.number}
+                </span>
+                <h3 className="font-display mt-1 text-xl text-foreground">
                   {step.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted md:text-base">
+                <p className="mt-2 max-w-[16ch] text-sm leading-relaxed text-muted">
                   {step.description}
                 </p>
               </div>
