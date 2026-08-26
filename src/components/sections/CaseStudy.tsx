@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import TiltCard from "@/components/TiltCard";
 import BrowserMockup from "@/components/BrowserMockup";
@@ -32,19 +33,25 @@ export default function CaseStudy({
         reversed ? "md:[&>*:first-child]:order-2" : ""
       }`}
     >
-      <Reveal>
-        <div className={`grid gap-6 ${mockups.length > 1 ? "sm:grid-cols-2" : ""}`}>
-          {mockups.map((mockup) => (
-            <TiltCard key={mockup.alt}>
+      <div className={`grid gap-6 ${mockups.length > 1 ? "sm:grid-cols-2" : ""}`}>
+        {mockups.map((mockup, i) => (
+          <motion.div
+            key={mockup.alt}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.9, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <TiltCard>
               {mockup.type === "browser" ? (
                 <BrowserMockup alt={mockup.alt} src={mockup.src} label={name} />
               ) : (
                 <CatalogueMockup alt={mockup.alt} src={mockup.src} />
               )}
             </TiltCard>
-          ))}
-        </div>
-      </Reveal>
+          </motion.div>
+        ))}
+      </div>
 
       <Reveal delay={0.1}>
         <p className="text-xs uppercase tracking-[0.2em] text-gold">
