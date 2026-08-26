@@ -27,10 +27,10 @@ export default function ServiceBlock({
         <div
           aria-hidden="true"
           data-cursor-hover
-          className="bg-noise group relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-border transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_25px_70px_-20px_rgba(212,175,55,0.3)]"
+          className="bg-noise group relative flex aspect-square items-center justify-center overflow-hidden border border-border transition-colors duration-500 hover:border-gold/50"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-transparent transition-opacity duration-500 group-hover:from-gold/20" />
-          <span className="font-display text-gold-dark/50 relative text-9xl transition-transform duration-500 group-hover:scale-110">
+          <div className="absolute inset-0 bg-gradient-to-br from-gold/[0.06] via-transparent to-transparent transition-opacity duration-500 group-hover:from-gold/[0.12]" />
+          <span className="font-display text-gold-dark/40 relative text-9xl transition-transform duration-700 ease-out group-hover:scale-105">
             {index}
           </span>
         </div>

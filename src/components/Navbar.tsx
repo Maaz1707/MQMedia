@@ -40,8 +40,8 @@ export default function Navbar() {
             <li key={section.id}>
               <a
                 href={`#${section.id}`}
-                className={`text-sm tracking-wide transition-colors hover:text-gold ${
-                  activeId === section.id ? "text-gold" : "text-foreground/80"
+                className={`text-xs uppercase tracking-[0.15em] transition-colors hover:text-gold ${
+                  activeId === section.id ? "text-gold" : "text-foreground/70"
                 }`}
               >
                 {section.label}
@@ -52,7 +52,8 @@ export default function Navbar() {
 
         <a
           href="#contact"
-          className="hidden rounded-full border border-gold/40 px-5 py-2 text-sm tracking-wide text-gold transition-colors hover:bg-gold hover:text-background lg:inline-block"
+          data-cursor-hover
+          className="hidden border border-gold/50 px-5 py-2 text-xs uppercase tracking-[0.15em] text-gold transition-colors duration-300 hover:bg-gold hover:text-background lg:inline-block"
         >
           Book a Call
         </a>
@@ -81,8 +82,8 @@ export default function Navbar() {
                 <a
                   href={`#${section.id}`}
                   onClick={() => setOpen(false)}
-                  className={`block text-sm tracking-wide hover:text-gold ${
-                    activeId === section.id ? "text-gold" : "text-foreground/80"
+                  className={`block text-xs uppercase tracking-[0.15em] hover:text-gold ${
+                    activeId === section.id ? "text-gold" : "text-foreground/70"
                   }`}
                 >
                   {section.label}
@@ -93,7 +94,7 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="mt-2 inline-block rounded-full border border-gold/40 px-5 py-2 text-sm tracking-wide text-gold"
+                className="mt-2 inline-block border border-gold/50 px-5 py-2 text-xs uppercase tracking-[0.15em] text-gold"
               >
                 Book a Call
               </a>

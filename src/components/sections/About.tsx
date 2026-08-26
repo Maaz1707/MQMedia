@@ -19,7 +19,7 @@ export default function About() {
 
         <Reveal delay={0.2}>
           <p className="mx-auto mt-10 max-w-2xl text-center text-base leading-relaxed text-muted md:text-lg">
-            Most trade businesses in India and the GCC get the same three
+            Most trade businesses get the same three
             options: a freelancer who disappears after the invoice, a
             template that looks like every competitor&apos;s, or a large
             agency too slow and too expensive to justify. MQ Media exists

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,15 +12,16 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mqmedia.com";
 const SITE_DESCRIPTION =
-  "MQ Media is a design and growth studio for trade businesses across India and the GCC — branding, web development, catalogue design, SEO and social media management.";
+  "MQ Media is a design and growth studio for trade businesses worldwide — branding, web development, catalogue design, SEO and social media management.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
     "SEO",
     "SMMA",
     "social media marketing",
-    "trade business design India GCC",
+    "global trade business branding",
   ],
   openGraph: {
     title: "MQ Media | Where Vision Meets Precision",
@@ -60,7 +61,7 @@ const structuredData = {
   description: SITE_DESCRIPTION,
   url: BASE_URL,
   email: SITE_CONFIG.contactEmail,
-  areaServed: ["India", "United Arab Emirates", "Saudi Arabia", "Qatar", "Gulf Cooperation Council"],
+  areaServed: "Worldwide",
   makesOffer: [
     { "@type": "Offer", itemOffered: { "@type": "Service", name: "Branding & Identity" } },
     { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Design & Development" } },
@@ -74,7 +75,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${poppins.variable} h-full antialiased`}
+      className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
       <head>
         <script

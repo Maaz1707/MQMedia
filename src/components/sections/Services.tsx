@@ -50,7 +50,7 @@ const SERVICES = [
     includes: [
       "Technical SEO audits & fixes",
       "On-page & local search optimization",
-      "GCC & India regional targeting",
+      "International & local search targeting",
       "Monthly growth reporting",
     ],
     outcome: "Found by the buyers actively looking for what you sell.",

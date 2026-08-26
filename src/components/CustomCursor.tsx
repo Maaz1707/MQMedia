@@ -10,8 +10,10 @@ export default function CustomCursor() {
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 400, damping: 35, mass: 0.4 });
-  const springY = useSpring(y, { stiffness: 400, damping: 35, mass: 0.4 });
+  const dotX = useSpring(x, { stiffness: 600, damping: 45, mass: 0.3 });
+  const dotY = useSpring(y, { stiffness: 600, damping: 45, mass: 0.3 });
+  const ringX = useSpring(x, { stiffness: 180, damping: 24, mass: 0.6 });
+  const ringY = useSpring(y, { stiffness: 180, damping: 24, mass: 0.6 });
 
   useEffect(() => {
     const mq = window.matchMedia("(pointer: fine)");
@@ -55,26 +57,34 @@ export default function CustomCursor() {
   if (!isFinePointer) return null;
 
   return (
-    <motion.div
-      aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-[100] mix-blend-difference"
-      style={{
-        x: springX,
-        y: springY,
-        opacity: isVisible ? 1 : 0,
-      }}
-    >
+    <>
       <motion.div
-        className="rounded-full bg-gold"
-        animate={{
-          width: isHovering ? 44 : 10,
-          height: isHovering ? 44 : 10,
-          x: isHovering ? -22 : -5,
-          y: isHovering ? -22 : -5,
-          opacity: isHovering ? 0.35 : 1,
+        aria-hidden="true"
+        className="pointer-events-none fixed left-0 top-0 z-[100] h-1 w-1 rounded-full bg-gold"
+        style={{
+          x: dotX,
+          y: dotY,
+          translateX: "-50%",
+          translateY: "-50%",
+          opacity: isVisible && !isHovering ? 1 : 0,
         }}
-        transition={{ type: "spring", stiffness: 350, damping: 28 }}
       />
-    </motion.div>
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none fixed left-0 top-0 z-[100] rounded-full border border-gold"
+        style={{
+          x: ringX,
+          y: ringY,
+          translateX: "-50%",
+          translateY: "-50%",
+          opacity: isVisible ? (isHovering ? 0.9 : 0.5) : 0,
+        }}
+        animate={{
+          width: isHovering ? 52 : 28,
+          height: isHovering ? 52 : 28,
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 26 }}
+      />
+    </>
   );
 }

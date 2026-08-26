@@ -23,7 +23,7 @@
   --color-gold-dark: var(--gold-dark);
   --color-border: var(--border);
   --font-sans: var(--font-inter);
-  --font-display: var(--font-poppins);
+  --font-display: var(--font-playfair);
 }
 
 html {
@@ -51,10 +51,14 @@ section[id] {
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, var(--gold-light), var(--gold) 45%, var(--gold-dark));
+  background: linear-gradient(100deg, var(--gold-dark) 0%, var(--gold-light) 45%, var(--gold) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.hairline {
+  border: 1px solid var(--border);
 }
 
 .bg-noise {

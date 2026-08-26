@@ -12,8 +12,7 @@ export default function Footer() {
             <Logo size={96} />
             <p className="mt-5 text-sm leading-relaxed text-muted">
               Branding, web development, catalogue design, SEO and social
-              media management for trade businesses across India and the
-              GCC.
+              media management for ambitious trade businesses worldwide.
             </p>
           </div>
 

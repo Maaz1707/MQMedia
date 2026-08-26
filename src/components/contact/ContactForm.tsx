@@ -34,7 +34,7 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-gold/40 bg-surface p-8 text-center">
+      <div className="border border-gold/40 bg-surface p-10 text-center">
         <p className="font-display text-lg text-gold">Message Sent</p>
         <p className="mt-2 text-sm text-muted">
           Thanks for reaching out &mdash; we&apos;ll get back to you shortly.
@@ -47,7 +47,7 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="text-xs uppercase tracking-wide text-muted">
+          <label htmlFor="name" className="text-xs uppercase tracking-[0.15em] text-muted">
             Name
           </label>
           <input
@@ -55,11 +55,11 @@ export default function ContactForm() {
             name="name"
             type="text"
             required
-            className="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-foreground outline-none focus:border-gold"
+            className="mt-2 w-full border border-border bg-surface px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-gold"
           />
         </div>
         <div>
-          <label htmlFor="email" className="text-xs uppercase tracking-wide text-muted">
+          <label htmlFor="email" className="text-xs uppercase tracking-[0.15em] text-muted">
             Email
           </label>
           <input
@@ -67,20 +67,20 @@ export default function ContactForm() {
             name="email"
             type="email"
             required
-            className="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-foreground outline-none focus:border-gold"
+            className="mt-2 w-full border border-border bg-surface px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-gold"
           />
         </div>
       </div>
 
       <div>
-        <label htmlFor="service" className="text-xs uppercase tracking-wide text-muted">
+        <label htmlFor="service" className="text-xs uppercase tracking-[0.15em] text-muted">
           Service Interested In
         </label>
         <select
           id="service"
           name="service"
           defaultValue="Design"
-          className="mt-2 w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-foreground outline-none focus:border-gold"
+          className="mt-2 w-full border border-border bg-surface px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-gold"
         >
           {SERVICES.map((s) => (
             <option key={s} value={s}>
@@ -91,7 +91,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" className="text-xs uppercase tracking-wide text-muted">
+        <label htmlFor="message" className="text-xs uppercase tracking-[0.15em] text-muted">
           Message
         </label>
         <textarea
@@ -99,7 +99,7 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="mt-2 w-full resize-none rounded-lg border border-border bg-surface px-4 py-3 text-sm text-foreground outline-none focus:border-gold"
+          className="mt-2 w-full resize-none border border-border bg-surface px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-gold"
         />
       </div>
 
@@ -112,7 +112,8 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="mt-2 rounded-full bg-gold px-8 py-3 text-sm font-medium tracking-wide text-background transition-transform hover:scale-[1.02] disabled:opacity-60"
+        data-cursor-hover
+        className="mt-2 border border-gold bg-gold px-8 py-4 text-xs uppercase tracking-[0.15em] text-background transition-colors duration-300 hover:bg-transparent hover:text-gold disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "submitting" ? "Sending..." : "Send Message"}
       </button>

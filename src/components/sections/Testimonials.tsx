@@ -19,7 +19,7 @@ export default function Testimonials() {
         <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
           {TESTIMONIAL_SLOTS.map((client, i) => (
             <Reveal key={client} delay={i * 0.1}>
-              <div className="flex h-full flex-col justify-between rounded-2xl border border-border bg-surface p-8 transition-all duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-[0_25px_70px_-20px_rgba(212,175,55,0.25)]">
+              <div className="flex h-full flex-col justify-between border border-border bg-surface p-10 transition-colors duration-500 hover:border-gold/50">
                 <PlaceholderNote>
                   Real quote from {client} goes here once provided.
                 </PlaceholderNote>

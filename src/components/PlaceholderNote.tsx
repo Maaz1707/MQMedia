@@ -11,9 +11,9 @@ type PlaceholderNoteProps = {
  */
 export default function PlaceholderNote({ children }: PlaceholderNoteProps) {
   return (
-    <div className="rounded-xl border border-dashed border-gold/40 bg-gold/5 px-4 py-3">
-      <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold">
-        Placeholder — content pending
+    <div className="border-l border-gold/50 py-1 pl-5">
+      <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-gold-dark">
+        Placeholder &mdash; Content Pending
       </p>
       <p className="mt-2 text-sm leading-relaxed text-muted">{children}</p>
     </div>

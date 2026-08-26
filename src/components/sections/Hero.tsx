@@ -37,17 +37,12 @@ export default function Hero() {
         </div>
       </div>
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/10 blur-[120px]"
-      />
-
       <div className="relative">
-        <p className="text-xs uppercase tracking-[0.3em] text-gold">
-          Design &amp; Growth Studio for Trade Businesses &mdash; India &amp; GCC
+        <p className="text-xs uppercase tracking-[0.35em] text-gold">
+          A Design &amp; Growth Studio, Worldwide
         </p>
 
-        <h1 className="font-display text-gradient-gold mx-auto mt-6 max-w-5xl text-5xl leading-[1.05] tracking-tight md:text-7xl">
+        <h1 className="font-display text-gradient-gold mx-auto mt-7 max-w-5xl text-5xl font-medium leading-[1.15] md:text-7xl">
           The Difference Between Being Considered and Being Chosen.
         </h1>
 
@@ -60,14 +55,14 @@ export default function Hero() {
           <a
             href="#contact"
             data-cursor-hover
-            className="rounded-full bg-gold px-9 py-4 text-sm font-medium tracking-wide text-background shadow-[0_0_0_rgba(212,175,55,0)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(212,175,55,0.5)]"
+            className="border border-gold bg-gold px-9 py-4 text-xs uppercase tracking-[0.15em] text-background transition-colors duration-300 hover:bg-transparent hover:text-gold"
           >
             Book a Call
           </a>
           <a
             href="#work"
             data-cursor-hover
-            className="rounded-full border border-gold/40 px-9 py-4 text-sm tracking-wide text-gold transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-gold/10"
+            className="border border-border px-9 py-4 text-xs uppercase tracking-[0.15em] text-foreground/80 transition-colors duration-300 hover:border-gold hover:text-gold"
           >
             See the Work
           </a>

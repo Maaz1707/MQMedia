@@ -42,17 +42,17 @@ export default function WhyMQ() {
 
         {/* Desktop comparison table */}
         <Reveal delay={0.15} className="mt-16 hidden overflow-x-auto md:block">
-          <table className="w-full min-w-[640px] border-collapse overflow-hidden rounded-2xl border border-border text-sm">
+          <table className="w-full min-w-[640px] border-collapse text-sm">
             <thead>
-              <tr className="border-b border-border bg-surface text-left">
-                <th className="px-6 py-5 font-normal text-muted">&nbsp;</th>
-                <th className="px-6 py-5 font-normal text-muted">
+              <tr className="border-b border-border text-left">
+                <th className="px-6 py-5 font-normal">&nbsp;</th>
+                <th className="px-6 py-5 text-xs font-normal uppercase tracking-[0.15em] text-muted">
                   Freelancers
                 </th>
-                <th className="px-6 py-5 font-normal text-muted">
+                <th className="px-6 py-5 text-xs font-normal uppercase tracking-[0.15em] text-muted">
                   Large Agencies
                 </th>
-                <th className="font-display bg-gold/10 px-6 py-5 text-gold">
+                <th className="font-display border-b-2 border-gold px-6 py-5 text-xs font-normal uppercase tracking-[0.15em] text-gold">
                   MQ Media
                 </th>
               </tr>
@@ -61,14 +61,14 @@ export default function WhyMQ() {
               {ROWS.map((row) => (
                 <tr
                   key={row.label}
-                  className="border-b border-border transition-colors last:border-none hover:bg-gold/5"
+                  className="border-b border-border last:border-none"
                 >
-                  <td className="px-6 py-5 font-medium text-foreground">
+                  <td className="px-6 py-6 font-medium text-foreground">
                     {row.label}
                   </td>
-                  <td className="px-6 py-5 text-muted">{row.freelancer}</td>
-                  <td className="px-6 py-5 text-muted">{row.agency}</td>
-                  <td className="bg-gold/5 px-6 py-5 text-foreground/90">
+                  <td className="px-6 py-6 text-muted">{row.freelancer}</td>
+                  <td className="px-6 py-6 text-muted">{row.agency}</td>
+                  <td className="border-l border-gold/20 px-6 py-6 text-foreground/90">
                     {row.mq}
                   </td>
                 </tr>
@@ -81,7 +81,7 @@ export default function WhyMQ() {
         <div className="mt-14 flex flex-col gap-5 md:hidden">
           {ROWS.map((row, i) => (
             <Reveal key={row.label} delay={i * 0.08}>
-              <div className="rounded-2xl border border-border bg-surface p-6">
+              <div className="border border-border bg-surface p-6">
                 <p className="font-display text-sm uppercase tracking-[0.15em] text-gold">
                   {row.label}
                 </p>
@@ -94,7 +94,7 @@ export default function WhyMQ() {
                     <dt className="text-muted">Large Agencies</dt>
                     <dd className="text-right text-foreground/70">{row.agency}</dd>
                   </div>
-                  <div className="flex justify-between gap-4 rounded-lg bg-gold/10 px-3 py-2">
+                  <div className="flex justify-between gap-4 border-t border-gold/30 pt-3">
                     <dt className="font-medium text-gold">MQ Media</dt>
                     <dd className="text-right text-foreground/90">{row.mq}</dd>
                   </div>
