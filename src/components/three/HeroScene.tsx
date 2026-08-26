@@ -2,41 +2,41 @@
 
 import { useEffect, useRef, type RefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Sparkles } from "@react-three/drei";
+import { Float } from "@react-three/drei";
 import * as THREE from "three";
 
-type PrecisionMarkProps = {
+type PrecisionRingProps = {
   scrollProgress: RefObject<number>;
   pointerTilt: RefObject<number>;
 };
 
-function PrecisionMark({ scrollProgress, pointerTilt }: PrecisionMarkProps) {
+function PrecisionRing({ scrollProgress, pointerTilt }: PrecisionRingProps) {
   const group = useRef<THREE.Group>(null);
+  const outer = useRef<THREE.Mesh>(null);
   const inner = useRef<THREE.Mesh>(null);
 
   useFrame((_, delta) => {
-    if (!group.current || !inner.current) return;
+    if (!group.current || !outer.current || !inner.current) return;
     const scroll = scrollProgress.current ?? 0;
     const tilt = pointerTilt.current ?? 0;
 
-    group.current.rotation.y += delta * 0.18;
-    group.current.rotation.x = 0.25 + scroll * Math.PI * 0.6 + tilt * 0.25;
-    group.current.rotation.z = scroll * 0.4;
-    group.current.scale.setScalar(1 - scroll * 0.15);
+    group.current.rotation.x = 0.5 + scroll * Math.PI * 0.5 + tilt * 0.2;
+    group.current.rotation.y += delta * 0.12;
+    group.current.scale.setScalar(1 - scroll * 0.12);
 
-    inner.current.rotation.y -= delta * 0.32;
-    inner.current.rotation.z += delta * 0.12 + scroll * 0.5;
+    outer.current.rotation.z += delta * 0.06;
+    inner.current.rotation.z -= delta * 0.1;
   });
 
   return (
     <group ref={group}>
-      <mesh>
-        <icosahedronGeometry args={[1.6, 0]} />
-        <meshBasicMaterial color="#d4af37" wireframe transparent opacity={0.55} />
+      <mesh ref={outer}>
+        <torusGeometry args={[1.35, 0.05, 32, 96]} />
+        <meshStandardMaterial color="#d4af37" metalness={0.9} roughness={0.25} />
       </mesh>
-      <mesh ref={inner}>
-        <octahedronGeometry args={[0.85, 0]} />
-        <meshBasicMaterial color="#f1d896" wireframe transparent opacity={0.8} />
+      <mesh ref={inner} rotation={[Math.PI / 2.4, 0.3, 0]}>
+        <torusGeometry args={[0.92, 0.028, 32, 96]} />
+        <meshStandardMaterial color="#f1d896" metalness={0.9} roughness={0.3} />
       </mesh>
     </group>
   );
@@ -61,16 +61,21 @@ export default function HeroScene({ scrollProgress }: HeroSceneProps) {
 
   return (
     <Canvas
-      camera={{ position: [0, 0, 5], fov: 45 }}
+      dpr={[1, 1.5]}
+      camera={{ position: [0, 0, 5], fov: 42 }}
       onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
       onPointerMove={(e) => {
         pointerTilt.current = e.clientY / window.innerHeight - 0.5;
       }}
     >
-      <ambientLight intensity={0.6} />
-      <pointLight position={[4, 4, 4]} intensity={1.2} color="#d4af37" />
-      <PrecisionMark scrollProgress={scrollProgress} pointerTilt={pointerTilt} />
-      <Sparkles count={60} scale={4.5} size={2} speed={0.25} color="#d4af37" opacity={0.5} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[3, 4, 5]} intensity={2.4} color="#fff3d6" />
+      <directionalLight position={[-4, -1, 2]} intensity={0.6} color="#f1d896" />
+      <pointLight position={[0, 2, -4]} intensity={0.5} color="#9c7a24" />
+
+      <Float speed={1.4} rotationIntensity={0.15} floatIntensity={0.4}>
+        <PrecisionRing scrollProgress={scrollProgress} pointerTilt={pointerTilt} />
+      </Float>
     </Canvas>
   );
 }
