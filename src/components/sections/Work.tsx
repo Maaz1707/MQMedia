@@ -9,12 +9,12 @@ const PROJECTS = [
 
 export default function Work() {
   return (
-    <section id="work" className="border-t border-border py-4">
-      <Reveal className="px-6 pt-24 text-center">
+    <section id="work" className="section-divider py-4">
+      <Reveal className="px-6 pt-32 text-center md:pt-40">
         <p className="text-xs uppercase tracking-[0.3em] text-gold">
           Selected Work
         </p>
-        <h2 className="font-display mt-4 text-3xl text-foreground md:text-4xl">
+        <h2 className="font-display mt-5 text-4xl text-foreground md:text-5xl">
           Proof, Not Promises
         </h2>
       </Reveal>

@@ -6,22 +6,22 @@ const SOCIAL_ENTRIES = Object.entries(SITE_CONFIG.social).filter(([, url]) => ur
 
 export default function Contact() {
   return (
-    <section id="contact" className="border-t border-border bg-noise px-6 py-28">
+    <section id="contact" className="section-divider bg-noise px-6 py-32 md:py-40">
       <div className="mx-auto max-w-6xl">
         <Reveal className="text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-gold">
             Get in Touch
           </p>
-          <h2 className="font-display mt-4 text-3xl text-foreground md:text-4xl">
+          <h2 className="font-display mt-5 text-4xl text-foreground md:text-5xl">
             Let&apos;s Build Something Precise
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-muted md:text-base">
+          <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted md:text-lg">
             Tell us about your project and we&apos;ll get back to you within
             one business day.
           </p>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-16 md:grid-cols-2">
+        <div className="mt-20 grid grid-cols-1 gap-16 md:grid-cols-2">
           <Reveal>
             <h3 className="font-display text-xl text-foreground">
               Contact Details

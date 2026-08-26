@@ -61,3 +61,57 @@ section[id] {
   background-image: radial-gradient(circle at 1px 1px, rgba(212, 175, 55, 0.06) 1px, transparent 0);
   background-size: 24px 24px;
 }
+
+.section-divider {
+  position: relative;
+  border-top: none;
+}
+
+.section-divider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent 100%
+  );
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--background);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dark);
+  border-radius: 999px;
+  border: 2px solid var(--background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* Applied by CustomCursor.tsx only after it has mounted and confirmed a
+   fine pointer — never in plain CSS, so a JS failure never leaves the
+   user without any visible cursor. */
+.custom-cursor-active,
+.custom-cursor-active a,
+.custom-cursor-active button {
+  cursor: none;
+}
+

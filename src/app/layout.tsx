@@ -3,6 +3,8 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
+import ScrollProgress from "@/components/ScrollProgress";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 const inter = Inter({
@@ -81,6 +83,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
+        <ScrollProgress />
+        <CustomCursor />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

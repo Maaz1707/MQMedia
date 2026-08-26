@@ -72,15 +72,15 @@ const SERVICES = [
 
 export default function Services() {
   return (
-    <section id="services" className="border-t border-border py-4">
-      <Reveal className="px-6 pt-24 text-center">
+    <section id="services" className="section-divider py-4">
+      <Reveal className="px-6 pt-32 text-center md:pt-40">
         <p className="text-xs uppercase tracking-[0.3em] text-gold">
           What We Do
         </p>
-        <h2 className="font-display mt-4 text-3xl text-foreground md:text-4xl">
+        <h2 className="font-display mt-5 text-4xl text-foreground md:text-5xl">
           Five Disciplines, One Standard
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted md:text-base">
+        <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted md:text-lg">
           Every service below is run to the same level of precision, whether
           it&apos;s a logo or a lead-generation system.
         </p>

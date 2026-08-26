@@ -1,3 +1,7 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import Reveal from "@/components/Reveal";
 
 const STEPS = [
@@ -28,22 +32,38 @@ const STEPS = [
 ];
 
 export default function Process() {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 70%", "end 60%"],
+  });
+  const lineScale = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
-    <section id="process" className="border-t border-border bg-background-alt px-6 py-28">
+    <section id="process" className="section-divider bg-background-alt px-6 py-32 md:py-40">
       <div className="mx-auto max-w-5xl">
         <Reveal className="text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-gold">
             How We Work
           </p>
-          <h2 className="font-display mt-4 text-3xl text-foreground md:text-4xl">
+          <h2 className="font-display mt-5 text-4xl text-foreground md:text-5xl">
             A Process Built for Certainty
           </h2>
         </Reveal>
 
-        <div className="relative mt-16 grid grid-cols-1 gap-10 md:grid-cols-4">
+        <div ref={timelineRef} className="relative mt-20 grid grid-cols-1 gap-12 md:grid-cols-4">
           <div
             aria-hidden="true"
             className="absolute left-0 right-0 top-8 hidden h-px bg-border md:block"
+          />
+          <motion.div
+            aria-hidden="true"
+            style={{ scaleX: lineScale }}
+            className="absolute left-0 right-0 top-8 hidden h-px origin-left bg-gradient-to-r from-gold-dark via-gold to-gold-light md:block"
           />
           {STEPS.map((step, i) => (
             <Reveal key={step.number} delay={i * 0.1}>
@@ -51,10 +71,10 @@ export default function Process() {
                 <span className="font-display text-gradient-gold relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-gold/40 bg-background text-xl">
                   {step.number}
                 </span>
-                <h3 className="font-display mt-5 text-lg text-foreground">
+                <h3 className="font-display mt-6 text-xl text-foreground">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
+                <p className="mt-3 text-sm leading-relaxed text-muted md:text-base">
                   {step.description}
                 </p>
               </div>

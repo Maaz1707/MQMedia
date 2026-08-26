@@ -32,7 +32,7 @@ export default function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
       >
-        <div className="h-[520px] w-[520px]">
+        <div className="h-[420px] w-[420px] md:h-[620px] md:w-[620px]">
           <HeroScene scrollProgress={scrollProgress} />
         </div>
       </div>
@@ -47,25 +47,27 @@ export default function Hero() {
           Design &amp; Growth Studio for Trade Businesses &mdash; India &amp; GCC
         </p>
 
-        <h1 className="font-display text-gradient-gold mx-auto mt-6 max-w-4xl text-4xl leading-tight md:text-6xl">
+        <h1 className="font-display text-gradient-gold mx-auto mt-6 max-w-5xl text-5xl leading-[1.05] tracking-tight md:text-7xl">
           The Difference Between Being Considered and Being Chosen.
         </h1>
 
-        <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-muted md:text-base">
+        <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-muted md:text-lg">
           MQ Media builds brand identity, websites, catalogues and growth
           systems precise enough to win the room before you walk into it.
         </p>
 
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
+        <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:justify-center">
           <a
             href="#contact"
-            className="rounded-full bg-gold px-8 py-3 text-sm font-medium tracking-wide text-background transition-transform hover:scale-[1.03]"
+            data-cursor-hover
+            className="rounded-full bg-gold px-9 py-4 text-sm font-medium tracking-wide text-background shadow-[0_0_0_rgba(212,175,55,0)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(212,175,55,0.5)]"
           >
             Book a Call
           </a>
           <a
             href="#work"
-            className="rounded-full border border-gold/40 px-8 py-3 text-sm tracking-wide text-gold transition-colors hover:bg-gold/10"
+            data-cursor-hover
+            className="rounded-full border border-gold/40 px-9 py-4 text-sm tracking-wide text-gold transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-gold/10"
           >
             See the Work
           </a>

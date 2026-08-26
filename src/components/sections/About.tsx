@@ -3,7 +3,7 @@ import PlaceholderNote from "@/components/PlaceholderNote";
 
 export default function About() {
   return (
-    <section id="about" className="border-t border-border px-6 py-28">
+    <section id="about" className="section-divider px-6 py-32 md:py-40">
       <div className="mx-auto max-w-4xl">
         <Reveal>
           <p className="text-center text-xs uppercase tracking-[0.3em] text-gold">
@@ -12,13 +12,13 @@ export default function About() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <h2 className="font-display mt-4 text-center text-3xl text-foreground md:text-4xl">
+          <h2 className="font-display mt-5 text-center text-4xl leading-tight text-foreground md:text-5xl">
             Trade Businesses Deserve Better Than a Template
           </h2>
         </Reveal>
 
         <Reveal delay={0.2}>
-          <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-relaxed text-muted md:text-base">
+          <p className="mx-auto mt-10 max-w-2xl text-center text-base leading-relaxed text-muted md:text-lg">
             Most trade businesses in India and the GCC get the same three
             options: a freelancer who disappears after the invoice, a
             template that looks like every competitor&apos;s, or a large
