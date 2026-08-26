@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="flex flex-col gap-10 md:flex-row md:justify-between">
           <div className="max-w-sm">
-            <Logo size={44} showTagline />
+            <Logo size={96} />
             <p className="mt-5 text-sm leading-relaxed text-muted">
               Branding, web development, catalogue design, SEO and social
               media management for trade businesses across India and the
