@@ -1,19 +1,7 @@
-import Link from "next/link";
 import Logo from "./Logo";
+import { NAV_SECTIONS, SITE_CONFIG, whatsappLink } from "@/lib/site-config";
 
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
-
-const SOCIAL_LINKS = [
-  { href: "#", label: "Instagram" },
-  { href: "#", label: "LinkedIn" },
-  { href: "#", label: "Behance" },
-];
+const SOCIAL_ENTRIES = Object.entries(SITE_CONFIG.social).filter(([, url]) => url);
 
 export default function Footer() {
   return (
@@ -23,8 +11,9 @@ export default function Footer() {
           <div className="max-w-sm">
             <Logo size={44} showTagline />
             <p className="mt-5 text-sm leading-relaxed text-muted">
-              Design, web development, social media management and catalogue
-              production for brands that want precision at every touchpoint.
+              Branding, web development, catalogue design, SEO and social
+              media management for trade businesses across India and the
+              GCC.
             </p>
           </div>
 
@@ -34,14 +23,14 @@ export default function Footer() {
                 Navigate
               </h3>
               <ul className="mt-4 flex flex-col gap-3">
-                {NAV_LINKS.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
+                {NAV_SECTIONS.map((section) => (
+                  <li key={section.id}>
+                    <a
+                      href={`#${section.id}`}
                       className="text-sm text-muted transition-colors hover:text-gold"
                     >
-                      {link.label}
-                    </Link>
+                      {section.label}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -52,13 +41,33 @@ export default function Footer() {
                 Connect
               </h3>
               <ul className="mt-4 flex flex-col gap-3">
-                {SOCIAL_LINKS.map((link) => (
-                  <li key={link.label}>
+                <li>
+                  <a
+                    href={whatsappLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-muted transition-colors hover:text-gold"
+                  >
+                    WhatsApp
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`mailto:${SITE_CONFIG.contactEmail}`}
+                    className="text-sm text-muted transition-colors hover:text-gold"
+                  >
+                    Email
+                  </a>
+                </li>
+                {SOCIAL_ENTRIES.map(([key, url]) => (
+                  <li key={key}>
                     <a
-                      href={link.href}
-                      className="text-sm text-muted transition-colors hover:text-gold"
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm capitalize text-muted transition-colors hover:text-gold"
                     >
-                      {link.label}
+                      {key}
                     </a>
                   </li>
                 ))}

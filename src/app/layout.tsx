@@ -3,6 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SITE_CONFIG } from "@/lib/site-config";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -17,7 +18,7 @@ const poppins = Poppins({
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mqmedia.com";
 const SITE_DESCRIPTION =
-  "MQ Media is a design, web development, social media marketing and catalogue production agency.";
+  "MQ Media is a design and growth studio for trade businesses across India and the GCC — branding, web development, catalogue design, SEO and social media management.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -28,11 +29,13 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   keywords: [
     "MQ Media",
-    "design agency",
+    "branding agency",
     "web development",
+    "catalogue design",
+    "SEO",
     "SMMA",
     "social media marketing",
-    "catalogue design",
+    "trade business design India GCC",
   ],
   openGraph: {
     title: "MQ Media | Where Vision Meets Precision",
@@ -48,12 +51,35 @@ export const metadata: Metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: SITE_CONFIG.name,
+  description: SITE_DESCRIPTION,
+  url: BASE_URL,
+  email: SITE_CONFIG.contactEmail,
+  areaServed: ["India", "United Arab Emirates", "Saudi Arabia", "Qatar", "Gulf Cooperation Council"],
+  makesOffer: [
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Branding & Identity" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Design & Development" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Catalogue & Print Design" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "SEO & Growth Marketing" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Social Media Marketing & Management" } },
+  ],
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <Navbar />
         <main className="flex-1">{children}</main>

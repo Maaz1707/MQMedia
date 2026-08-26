@@ -1,53 +1,68 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "./Logo";
-
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
+import { NAV_SECTIONS } from "@/lib/site-config";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState<string>("");
+
+  useEffect(() => {
+    const sections = NAV_SECTIONS.map((s) => document.getElementById(s.id)).filter(
+      (el): el is HTMLElement => el !== null
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" onClick={() => setOpen(false)}>
+        <a href="#hero" onClick={() => setOpen(false)}>
           <Logo size={40} />
-        </Link>
+        </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-sm tracking-wide text-foreground/80 transition-colors hover:text-gold"
+        <ul className="hidden items-center gap-7 lg:flex">
+          {NAV_SECTIONS.map((section) => (
+            <li key={section.id}>
+              <a
+                href={`#${section.id}`}
+                className={`text-sm tracking-wide transition-colors hover:text-gold ${
+                  activeId === section.id ? "text-gold" : "text-foreground/80"
+                }`}
               >
-                {link.label}
-              </Link>
+                {section.label}
+              </a>
             </li>
           ))}
         </ul>
 
-        <Link
-          href="/contact"
-          className="hidden rounded-full border border-gold/40 px-5 py-2 text-sm tracking-wide text-gold transition-colors hover:bg-gold hover:text-background md:inline-block"
+        <a
+          href="#contact"
+          className="hidden rounded-full border border-gold/40 px-5 py-2 text-sm tracking-wide text-gold transition-colors hover:bg-gold hover:text-background lg:inline-block"
         >
-          Get a Quote
-        </Link>
+          Book a Call
+        </a>
 
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
-          className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 md:hidden"
+          className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 lg:hidden"
         >
           <span
             className={`h-px w-6 bg-gold transition-transform ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
@@ -59,27 +74,29 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="border-t border-border px-6 pb-6 md:hidden">
+        <div className="border-t border-border px-6 pb-6 lg:hidden">
           <ul className="flex flex-col gap-4 pt-4">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
+            {NAV_SECTIONS.map((section) => (
+              <li key={section.id}>
+                <a
+                  href={`#${section.id}`}
                   onClick={() => setOpen(false)}
-                  className="block text-sm tracking-wide text-foreground/80 hover:text-gold"
+                  className={`block text-sm tracking-wide hover:text-gold ${
+                    activeId === section.id ? "text-gold" : "text-foreground/80"
+                  }`}
                 >
-                  {link.label}
-                </Link>
+                  {section.label}
+                </a>
               </li>
             ))}
             <li>
-              <Link
-                href="/contact"
+              <a
+                href="#contact"
                 onClick={() => setOpen(false)}
                 className="mt-2 inline-block rounded-full border border-gold/40 px-5 py-2 text-sm tracking-wide text-gold"
               >
-                Get a Quote
-              </Link>
+                Book a Call
+              </a>
             </li>
           </ul>
         </div>
