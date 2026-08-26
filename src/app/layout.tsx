@@ -15,10 +15,37 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600"],
 });
 
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mqmedia.com";
+const SITE_DESCRIPTION =
+  "MQ Media is a design, web development, social media marketing and catalogue production agency.";
+
 export const metadata: Metadata = {
-  title: "MQ Media | Where Vision Meets Precision",
-  description:
-    "MQ Media is a design, web development, social media marketing and catalogue production agency.",
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "MQ Media | Where Vision Meets Precision",
+    template: "%s | MQ Media",
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "MQ Media",
+    "design agency",
+    "web development",
+    "SMMA",
+    "social media marketing",
+    "catalogue design",
+  ],
+  openGraph: {
+    title: "MQ Media | Where Vision Meets Precision",
+    description: SITE_DESCRIPTION,
+    url: BASE_URL,
+    siteName: "MQ Media",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MQ Media | Where Vision Meets Precision",
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
