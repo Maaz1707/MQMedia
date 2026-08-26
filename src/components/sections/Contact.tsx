@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import TextReveal from "@/components/TextReveal";
 import ContactForm from "@/components/contact/ContactForm";
 import { SITE_CONFIG, whatsappLink } from "@/lib/site-config";
 
@@ -13,7 +14,7 @@ export default function Contact() {
             Get in Touch
           </p>
           <h2 className="font-display mt-5 text-4xl text-foreground md:text-5xl">
-            Let&apos;s Build Something Precise
+            <TextReveal text="Let's Build Something Precise" />
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted md:text-lg">
             Tell us about your project and we&apos;ll get back to you within

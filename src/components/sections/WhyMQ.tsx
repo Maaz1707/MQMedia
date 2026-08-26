@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
+import TextReveal from "@/components/TextReveal";
 
 const ROWS = [
   {
@@ -39,7 +40,7 @@ export default function WhyMQ() {
             Why MQ
           </p>
           <h2 className="font-display mt-5 text-4xl text-foreground md:text-5xl">
-            Not a Freelancer. Not a Slow Agency.
+            <TextReveal text="Not a Freelancer. Not a Slow Agency." />
           </h2>
         </Reveal>
 

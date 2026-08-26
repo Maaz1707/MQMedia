@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import TextReveal from "@/components/TextReveal";
 import TiltCard from "@/components/TiltCard";
 import PlaceholderNote from "@/components/PlaceholderNote";
 
@@ -13,7 +14,7 @@ export default function Testimonials() {
             In Their Words
           </p>
           <h2 className="font-display mt-5 text-4xl text-foreground md:text-5xl">
-            Testimonials
+            <TextReveal text="Testimonials" />
           </h2>
         </Reveal>
 

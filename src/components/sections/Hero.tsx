@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
 import HeroRing from "./HeroRing";
 import Magnetic from "@/components/Magnetic";
+import TextReveal from "@/components/TextReveal";
 import { INTRO_TOTAL_S } from "@/lib/motion";
 
 const container = {
@@ -48,12 +49,13 @@ export default function Hero() {
           A Design &amp; Growth Studio, Worldwide
         </motion.p>
 
-        <motion.h1
-          variants={item}
-          className="font-display text-gradient-gold mx-auto mt-7 max-w-5xl text-5xl font-medium leading-[1.15] md:text-7xl"
-        >
-          The Difference Between Being Considered and Being Chosen.
-        </motion.h1>
+        <h1 className="font-display text-gradient-gold mx-auto mt-7 max-w-5xl text-5xl font-medium leading-[1.15] md:text-7xl">
+          <TextReveal
+            text="The Difference Between Being Considered and Being Chosen."
+            trigger="mount"
+            delay={INTRO_TOTAL_S + 0.14}
+          />
+        </h1>
 
         <motion.p
           variants={item}

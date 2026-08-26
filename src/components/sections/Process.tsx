@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import Reveal from "@/components/Reveal";
+import TextReveal from "@/components/TextReveal";
 
 const STEPS = [
   {
@@ -51,7 +52,7 @@ export default function Process() {
             How We Work
           </p>
           <h2 className="font-display mt-5 text-4xl text-foreground md:text-5xl">
-            A Process Built for Certainty
+            <TextReveal text="A Process Built for Certainty" />
           </h2>
         </Reveal>
 

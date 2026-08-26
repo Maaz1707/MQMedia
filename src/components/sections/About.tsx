@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import TextReveal from "@/components/TextReveal";
 import PlaceholderNote from "@/components/PlaceholderNote";
 
 export default function About() {
@@ -13,7 +14,7 @@ export default function About() {
 
         <Reveal delay={0.1}>
           <h2 className="font-display mt-5 text-center text-4xl leading-tight text-foreground md:text-5xl">
-            Trade Businesses Deserve Better Than a Template
+            <TextReveal text="Trade Businesses Deserve Better Than a Template" />
           </h2>
         </Reveal>
 

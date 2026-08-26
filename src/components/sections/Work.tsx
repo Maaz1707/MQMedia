@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import TextReveal from "@/components/TextReveal";
 import CaseStudy from "./CaseStudy";
 
 const PROJECTS = [
@@ -15,7 +16,7 @@ export default function Work() {
           Selected Work
         </p>
         <h2 className="font-display mt-5 text-4xl text-foreground md:text-5xl">
-          Proof, Not Promises
+          <TextReveal text="Proof, Not Promises" />
         </h2>
       </Reveal>
 
