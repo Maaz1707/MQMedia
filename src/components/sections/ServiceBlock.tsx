@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
+import TiltCard from "@/components/TiltCard";
 
 type ServiceBlockProps = {
   index: string;
@@ -27,16 +28,18 @@ export default function ServiceBlock({
       }`}
     >
       <Reveal>
-        <div
-          aria-hidden="true"
-          data-cursor-hover
-          className="bg-noise group relative flex aspect-square items-center justify-center overflow-hidden border border-border transition-colors duration-500 hover:border-gold/50"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-gold/[0.06] via-transparent to-transparent transition-opacity duration-500 group-hover:from-gold/[0.12]" />
-          <span className="font-display text-gold-dark/40 relative text-9xl transition-transform duration-700 ease-out group-hover:scale-105">
-            {index}
-          </span>
-        </div>
+        <TiltCard>
+          <div
+            aria-hidden="true"
+            data-cursor-hover
+            className="bg-noise group relative flex aspect-square items-center justify-center overflow-hidden border border-border transition-colors duration-500 hover:border-gold/50"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-gold/[0.06] via-transparent to-transparent transition-opacity duration-500 group-hover:from-gold/[0.12]" />
+            <span className="font-display text-gold-dark/40 relative text-9xl transition-transform duration-700 ease-out group-hover:scale-105">
+              {index}
+            </span>
+          </div>
+        </TiltCard>
       </Reveal>
 
       <Reveal delay={0.1}>

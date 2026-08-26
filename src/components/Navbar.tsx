@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
+import Magnetic from "./Magnetic";
 import { NAV_SECTIONS } from "@/lib/site-config";
 
 export default function Navbar() {
@@ -40,23 +41,30 @@ export default function Navbar() {
             <li key={section.id}>
               <a
                 href={`#${section.id}`}
-                className={`text-xs uppercase tracking-[0.15em] transition-colors hover:text-gold ${
+                className={`group relative inline-block py-1 text-xs uppercase tracking-[0.15em] transition-colors hover:text-gold ${
                   activeId === section.id ? "text-gold" : "text-foreground/70"
                 }`}
               >
                 {section.label}
+                <span
+                  className={`absolute -bottom-0.5 left-0 h-px w-full origin-left bg-gold transition-transform duration-300 ${
+                    activeId === section.id ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                />
               </a>
             </li>
           ))}
         </ul>
 
-        <a
-          href="#contact"
-          data-cursor-hover
-          className="hidden border border-gold/50 px-5 py-2 text-xs uppercase tracking-[0.15em] text-gold transition-colors duration-300 hover:bg-gold hover:text-background lg:inline-block"
-        >
-          Book a Call
-        </a>
+        <Magnetic className="hidden lg:inline-block">
+          <a
+            href="#contact"
+            data-cursor-hover
+            className="block border border-gold/50 px-5 py-2 text-xs uppercase tracking-[0.15em] text-gold transition-colors duration-300 hover:bg-gold hover:text-background"
+          >
+            Book a Call
+          </a>
+        </Magnetic>
 
         <button
           type="button"

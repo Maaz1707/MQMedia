@@ -68,9 +68,15 @@ export default function Process() {
           {STEPS.map((step, i) => (
             <Reveal key={step.number} delay={i * 0.1}>
               <div className="relative flex flex-col items-center text-center md:items-start md:text-left">
-                <span className="font-display text-gradient-gold relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-gold/40 bg-background text-xl">
+                <motion.span
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18, delay: i * 0.1 }}
+                  className="font-display text-gradient-gold relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-gold/40 bg-background text-xl"
+                >
                   {step.number}
-                </span>
+                </motion.span>
                 <h3 className="font-display mt-6 text-xl text-foreground">
                   {step.title}
                 </h3>

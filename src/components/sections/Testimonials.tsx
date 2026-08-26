@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import TiltCard from "@/components/TiltCard";
 import PlaceholderNote from "@/components/PlaceholderNote";
 
 const TESTIMONIAL_SLOTS = ["Bae Laban", "Chopdar"];
@@ -19,14 +20,16 @@ export default function Testimonials() {
         <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
           {TESTIMONIAL_SLOTS.map((client, i) => (
             <Reveal key={client} delay={i * 0.1}>
-              <div className="flex h-full flex-col justify-between border border-border bg-surface p-10 transition-colors duration-500 hover:border-gold/50">
-                <PlaceholderNote>
-                  Real quote from {client} goes here once provided.
-                </PlaceholderNote>
-                <p className="mt-6 text-sm font-medium text-foreground/80">
-                  &mdash; {client}
-                </p>
-              </div>
+              <TiltCard className="h-full">
+                <div className="flex h-full flex-col justify-between border border-border bg-surface p-10 transition-colors duration-500 hover:border-gold/50">
+                  <PlaceholderNote>
+                    Real quote from {client} goes here once provided.
+                  </PlaceholderNote>
+                  <p className="mt-6 text-sm font-medium text-foreground/80">
+                    &mdash; {client}
+                  </p>
+                </div>
+              </TiltCard>
             </Reveal>
           ))}
         </div>

@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
 import HeroRing from "./HeroRing";
+import Magnetic from "@/components/Magnetic";
 import { INTRO_TOTAL_S } from "@/lib/motion";
 
 const container = {
@@ -63,20 +64,24 @@ export default function Hero() {
         </motion.p>
 
         <motion.div variants={item} className="mt-12 flex flex-col gap-4 sm:flex-row sm:justify-center">
-          <a
-            href="#contact"
-            data-cursor-hover
-            className="border border-gold bg-gold px-9 py-4 text-xs uppercase tracking-[0.15em] text-background transition-colors duration-300 hover:bg-transparent hover:text-gold"
-          >
-            Book a Call
-          </a>
-          <a
-            href="#work"
-            data-cursor-hover
-            className="border border-border px-9 py-4 text-xs uppercase tracking-[0.15em] text-foreground/80 transition-colors duration-300 hover:border-gold hover:text-gold"
-          >
-            See the Work
-          </a>
+          <Magnetic>
+            <a
+              href="#contact"
+              data-cursor-hover
+              className="block border border-gold bg-gold px-9 py-4 text-xs uppercase tracking-[0.15em] text-background transition-colors duration-300 hover:bg-transparent hover:text-gold"
+            >
+              Book a Call
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a
+              href="#work"
+              data-cursor-hover
+              className="block border border-border px-9 py-4 text-xs uppercase tracking-[0.15em] text-foreground/80 transition-colors duration-300 hover:border-gold hover:text-gold"
+            >
+              See the Work
+            </a>
+          </Magnetic>
         </motion.div>
       </motion.div>
 

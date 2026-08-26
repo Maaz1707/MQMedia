@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 
 const ROWS = [
@@ -58,10 +61,14 @@ export default function WhyMQ() {
               </tr>
             </thead>
             <tbody>
-              {ROWS.map((row) => (
-                <tr
+              {ROWS.map((row, i) => (
+                <motion.tr
                   key={row.label}
-                  className="border-b border-border last:border-none"
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className="border-b border-border transition-colors duration-300 hover:bg-gold/[0.03] last:border-none"
                 >
                   <td className="px-6 py-6 font-medium text-foreground">
                     {row.label}
@@ -71,7 +78,7 @@ export default function WhyMQ() {
                   <td className="border-l border-gold/20 px-6 py-6 text-foreground/90">
                     {row.mq}
                   </td>
-                </tr>
+                </motion.tr>
               ))}
             </tbody>
           </table>

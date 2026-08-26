@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { motion } from "framer-motion";
+import Magnetic from "@/components/Magnetic";
 
 const SERVICES = ["Design", "Web Development", "SMMA", "Catalogue Making", "Other"];
 
@@ -34,12 +36,17 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="border border-gold/40 bg-surface p-10 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="border border-gold/40 bg-surface p-10 text-center"
+      >
         <p className="font-display text-lg text-gold">Message Sent</p>
         <p className="mt-2 text-sm text-muted">
           Thanks for reaching out &mdash; we&apos;ll get back to you shortly.
         </p>
-      </div>
+      </motion.div>
     );
   }
 
@@ -104,19 +111,25 @@ export default function ContactForm() {
       </div>
 
       {status === "error" && (
-        <p className="text-sm text-red-400">
+        <motion.p
+          initial={{ opacity: 0, x: -6 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="text-sm text-red-400"
+        >
           Something went wrong. Please try again.
-        </p>
+        </motion.p>
       )}
 
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        data-cursor-hover
-        className="mt-2 border border-gold bg-gold px-8 py-4 text-xs uppercase tracking-[0.15em] text-background transition-colors duration-300 hover:bg-transparent hover:text-gold disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {status === "submitting" ? "Sending..." : "Send Message"}
-      </button>
+      <Magnetic className="mt-2">
+        <button
+          type="submit"
+          disabled={status === "submitting"}
+          data-cursor-hover
+          className="block w-full border border-gold bg-gold px-8 py-4 text-xs uppercase tracking-[0.15em] text-background transition-colors duration-300 hover:bg-transparent hover:text-gold disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {status === "submitting" ? "Sending..." : "Send Message"}
+        </button>
+      </Magnetic>
     </form>
   );
 }
