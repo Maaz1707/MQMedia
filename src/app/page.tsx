@@ -4,7 +4,6 @@ import Services from "@/components/sections/Services";
 import Process from "@/components/sections/Process";
 import Work from "@/components/sections/Work";
 import WhyMQ from "@/components/sections/WhyMQ";
-import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
 
 export default function Home() {
@@ -16,7 +15,6 @@ export default function Home() {
       <Process />
       <Work />
       <WhyMQ />
-      <Testimonials />
       <Contact />
     </>
   );

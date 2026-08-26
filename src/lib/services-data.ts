@@ -14,8 +14,7 @@ export const SERVICES: ServiceData[] = [
     index: "01",
     icon: "branding",
     title: "Branding & Identity",
-    description:
-      "A trade business without a distinct identity gets compared on price. We build the visual system that lets you compete on everything else.",
+    description: "A distinct identity is how you stop competing on price.",
     includes: ["Logo & Mark", "Identity System", "Brand Guidelines", "Brand Voice"],
     outcome:
       "A brand that photographs, prints and scales consistently — from your business card to your storefront.",
@@ -24,8 +23,7 @@ export const SERVICES: ServiceData[] = [
     index: "02",
     icon: "webdev",
     title: "Web Design & Development",
-    description:
-      "Custom-built on modern infrastructure, not assembled from a drag-and-drop template. Every site is designed around how your buyers actually decide.",
+    description: "Built to convert, not just to exist.",
     includes: ["Custom Build", "E-commerce", "Technical SEO", "Ongoing Support"],
     outcome: "A site fast enough to rank, and sharp enough to convert.",
   },
@@ -33,26 +31,23 @@ export const SERVICES: ServiceData[] = [
     index: "03",
     icon: "catalogue",
     title: "Catalogue & Print Design",
-    description:
-      "Menus, product catalogues and brochures designed to be handled, not skimmed — print-ready and digital-ready from the same source.",
+    description: "Designed to be picked up, not skimmed.",
     includes: ["Menu Layout", "Lookbooks", "Print-Ready Files", "Digital / PDF"],
-    outcome: "A catalogue built to be picked up, not scrolled past.",
+    outcome: "Print-ready and digital-ready, from one file.",
   },
   {
     index: "04",
     icon: "seo",
     title: "SEO & Growth Marketing",
-    description:
-      "Visibility for the buyers already searching for what you sell — built on technical fundamentals, not shortcuts that fade in a month.",
+    description: "Found by buyers already searching for you.",
     includes: ["Technical Audits", "On-Page SEO", "Local & Global", "Growth Reports"],
-    outcome: "Found by the buyers actively looking for what you sell.",
+    outcome: "Visibility that compounds, not fades in a month.",
   },
   {
     index: "05",
     icon: "smma",
     title: "SMMA",
-    description:
-      "Ongoing social strategy and management that reflects the quality of the business behind it, not just a posting calendar.",
+    description: "A presence that reflects the business behind it.",
     includes: ["Content Strategy", "Community", "Paid Social", "Performance Reports"],
     outcome: "A social presence that closes deals, not just impressions.",
   },

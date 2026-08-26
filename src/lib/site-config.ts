@@ -22,6 +22,5 @@ export const NAV_SECTIONS = [
   { id: "process", label: "Process" },
   { id: "work", label: "Work" },
   { id: "why-mq", label: "Why MQ" },
-  { id: "testimonials", label: "Testimonials" },
   { id: "contact", label: "Contact" },
 ];

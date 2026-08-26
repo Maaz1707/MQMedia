@@ -1,11 +1,12 @@
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
-import PlaceholderNote from "@/components/PlaceholderNote";
+import ParallaxGlow from "@/components/ParallaxGlow";
 
 export default function About() {
   return (
-    <section id="about" className="section-divider px-6 py-32 md:py-40">
-      <div className="mx-auto max-w-4xl">
+    <section id="about" className="section-divider relative overflow-hidden px-6 py-32 md:py-48">
+      <ParallaxGlow className="left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2" />
+      <div className="relative mx-auto max-w-3xl">
         <Reveal>
           <p className="text-center text-xs uppercase tracking-[0.3em] text-gold">
             About MQ Media
@@ -19,27 +20,19 @@ export default function About() {
         </Reveal>
 
         <Reveal delay={0.2}>
-          <p className="mx-auto mt-10 max-w-2xl text-center text-base leading-relaxed text-muted md:text-lg">
-            Most trade businesses get the same three
-            options: a freelancer who disappears after the invoice, a
-            template that looks like every competitor&apos;s, or a large
-            agency too slow and too expensive to justify. MQ Media exists
-            because none of those are good enough for a business whose
-            catalogue, website or menu is often the only thing standing
-            between a buyer and a decision. We treat that first impression
-            with the seriousness it deserves &mdash; sharp design, real
-            engineering, and a founder who is on every project, not just
-            the pitch.
+          <p className="mx-auto mt-8 max-w-xl text-center text-lg leading-relaxed text-muted">
+            No disappearing freelancers. No agency bureaucracy. Just precise
+            work, delivered by the person who designed it.
           </p>
         </Reveal>
 
-        <Reveal delay={0.3} className="mt-12">
-          <PlaceholderNote>
-            Maaz&apos;s founder story goes here &mdash; background, why MQ
-            Media was started, and the personal belief that shapes how the
-            studio approaches trade-business design. Replace with real copy
-            once provided.
-          </PlaceholderNote>
+        <Reveal delay={0.3} className="mt-14 border-t border-border pt-10 text-center">
+          <p className="mx-auto max-w-xl text-base leading-relaxed text-foreground/80">
+            MQ Media was founded by Maaz, a final-year engineering student
+            who decided trade businesses deserved sharper design than they
+            were getting. He&apos;s personally on every project &mdash; from
+            the first sketch to the final file.
+          </p>
         </Reveal>
       </div>
     </section>

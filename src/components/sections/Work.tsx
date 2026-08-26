@@ -1,10 +1,43 @@
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
-import CaseStudy from "./CaseStudy";
+import CaseStudy, { type Mockup } from "./CaseStudy";
 
-const PROJECTS = [
-  { name: "Bae Laban", category: "Menu Design" },
-  { name: "Chopdar", category: "Catalogue Design" },
+const PROJECTS: {
+  name: string;
+  category: string;
+  caption: string;
+  mockups: Mockup[];
+}[] = [
+  {
+    name: "Bae Laban",
+    category: "Menu Design",
+    caption: "A menu built to be picked up, not skimmed.",
+    mockups: [{ type: "catalogue", alt: "Bae Laban Menu" }],
+  },
+  {
+    name: "Chopdar",
+    category: "Catalogue Design",
+    caption: "A catalogue with the polish of the products inside it.",
+    mockups: [{ type: "catalogue", alt: "Chopdar Catalogue" }],
+  },
+  {
+    name: "Bestech",
+    category: "Catalogue & Website Design",
+    caption: "One identity, carried across print and web.",
+    mockups: [
+      { type: "catalogue", alt: "Bestech Catalogue" },
+      { type: "browser", alt: "Bestech Website" },
+    ],
+  },
+  {
+    name: "AIM Hitech",
+    category: "Catalogue & Website Design",
+    caption: "Precision engineering, presented with equal precision.",
+    mockups: [
+      { type: "catalogue", alt: "AIM Hitech Catalogue" },
+      { type: "browser", alt: "AIM Hitech Website" },
+    ],
+  },
   // Add more projects here as they're completed.
 ];
 
