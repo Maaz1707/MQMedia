@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
+import PageIntro from "@/components/PageIntro";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 const inter = Inter({
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
+        <PageIntro />
         <ScrollProgress />
         <CustomCursor />
         <Navbar />

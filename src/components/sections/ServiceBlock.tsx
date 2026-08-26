@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 
 type ServiceBlockProps = {
@@ -46,11 +49,18 @@ export default function ServiceBlock({
         </p>
 
         <ul className="mt-7 flex flex-col gap-3">
-          {includes.map((item) => (
-            <li key={item} className="flex items-start gap-3 text-sm text-foreground/90 md:text-base">
+          {includes.map((item, i) => (
+            <motion.li
+              key={item}
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="flex items-start gap-3 text-sm text-foreground/90 md:text-base"
+            >
               <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
               {item}
-            </li>
+            </motion.li>
           ))}
         </ul>
 
