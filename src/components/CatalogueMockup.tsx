@@ -17,9 +17,14 @@ export default function CatalogueMockup({ src, alt }: CatalogueMockupProps) {
       style={{ transformStyle: "preserve-3d" }}
     >
       {src ? (
-        <Image src={src} alt={alt} fill className="object-cover" />
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover transition-transform duration-[4000ms] ease-out group-hover:scale-[1.1] group-hover:translate-x-1"
+        />
       ) : (
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gold/[0.08] via-transparent to-transparent">
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gold/[0.08] via-transparent to-transparent transition-transform duration-[4000ms] ease-out group-hover:scale-[1.1]">
           <span className="font-display text-gold-dark/30 text-4xl">{alt}</span>
         </div>
       )}

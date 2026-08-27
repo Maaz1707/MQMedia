@@ -18,6 +18,7 @@ type CaseStudyProps = {
   caption: string;
   mockups: Mockup[];
   reversed?: boolean;
+  onOpen: (layoutId: string, mockup: Mockup) => void;
 };
 
 export default function CaseStudy({
@@ -26,6 +27,7 @@ export default function CaseStudy({
   caption,
   mockups,
   reversed = false,
+  onOpen,
 }: CaseStudyProps) {
   return (
     <div
@@ -34,23 +36,39 @@ export default function CaseStudy({
       }`}
     >
       <div className={`grid gap-6 ${mockups.length > 1 ? "sm:grid-cols-2" : ""}`}>
-        {mockups.map((mockup, i) => (
-          <motion.div
-            key={mockup.alt}
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.9, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <TiltCard>
-              {mockup.type === "browser" ? (
-                <BrowserMockup alt={mockup.alt} src={mockup.src} label={name} />
-              ) : (
-                <CatalogueMockup alt={mockup.alt} src={mockup.src} />
-              )}
-            </TiltCard>
-          </motion.div>
-        ))}
+        {mockups.map((mockup, i) => {
+          const layoutId = `portfolio-${name}-${mockup.alt}`;
+          return (
+            <motion.div
+              key={mockup.alt}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.9, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <motion.div
+                layoutId={layoutId}
+                onClick={() => onOpen(layoutId, mockup)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") onOpen(layoutId, mockup);
+                }}
+                data-cursor-hover
+                data-cursor-text="View"
+                className="group cursor-pointer"
+              >
+                <TiltCard>
+                  {mockup.type === "browser" ? (
+                    <BrowserMockup alt={mockup.alt} src={mockup.src} label={name} />
+                  ) : (
+                    <CatalogueMockup alt={mockup.alt} src={mockup.src} />
+                  )}
+                </TiltCard>
+              </motion.div>
+            </motion.div>
+          );
+        })}
       </div>
 
       <Reveal delay={0.1}>

@@ -1,5 +1,10 @@
+"use client";
+
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
+import PortfolioLightbox, { type OpenMockup } from "@/components/PortfolioLightbox";
 import CaseStudy, { type Mockup } from "./CaseStudy";
 
 const PROJECTS: {
@@ -42,6 +47,8 @@ const PROJECTS: {
 ];
 
 export default function Work() {
+  const [open, setOpen] = useState<OpenMockup | null>(null);
+
   return (
     <section id="work" className="section-divider py-4">
       <Reveal className="px-6 pt-32 text-center md:pt-40">
@@ -54,8 +61,19 @@ export default function Work() {
       </Reveal>
 
       {PROJECTS.map((project, i) => (
-        <CaseStudy key={project.name} {...project} reversed={i % 2 === 1} />
+        <CaseStudy
+          key={project.name}
+          {...project}
+          reversed={i % 2 === 1}
+          onOpen={(layoutId, mockup) =>
+            setOpen({ layoutId, mockup, name: project.name, category: project.category })
+          }
+        />
       ))}
+
+      <AnimatePresence>
+        {open && <PortfolioLightbox item={open} onClose={() => setOpen(null)} />}
+      </AnimatePresence>
     </section>
   );
 }
