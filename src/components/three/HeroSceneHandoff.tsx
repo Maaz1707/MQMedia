@@ -66,11 +66,17 @@ export default function HeroSceneHandoff() {
   const y = useSpring(yRaw, { stiffness: 110, damping: 26 });
 
   useMotionValueEvent(progress, "change", (v) => {
-    const shouldMount = v < 0.97;
+    // Wait until opacity has actually reached (~)0 before unmounting —
+    // otherwise the ring would pop out mid-fade instead of disappearing
+    // smoothly. Below 0.05 the whole component renders nothing, which
+    // drops it from the compositor entirely for the rest of the page
+    // (Services and beyond no longer pay for its continuous transform/
+    // opacity updates on every scroll frame).
+    const shouldMount = v < 0.995;
     setMounted((prev) => (prev === shouldMount ? prev : shouldMount));
   });
 
-  if (!span) return null;
+  if (!span || !mounted) return null;
 
   return (
     <motion.div
@@ -78,7 +84,7 @@ export default function HeroSceneHandoff() {
       style={{ opacity, scale, x, y }}
       className="pointer-events-none fixed inset-0 z-[5] origin-center"
     >
-      {mounted && <HeroScene scrollProgress={heroLocalProgress} velocity={smoothVelocity} />}
+      <HeroScene scrollProgress={heroLocalProgress} velocity={smoothVelocity} />
     </motion.div>
   );
 }

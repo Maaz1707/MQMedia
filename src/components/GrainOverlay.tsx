@@ -8,7 +8,13 @@ export default function GrainOverlay() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[65] opacity-[0.045] mix-blend-overlay"
+      // No mix-blend-mode here on purpose: blending a full-viewport fixed
+      // layer against everything beneath it (canvas, images, sticky
+      // scroll-jacked sections) forces the compositor to re-merge every
+      // layer on every frame — a real, measured cause of scroll jank on
+      // the heavy scroll-jacked sections. Plain opacity composites for
+      // free instead, at a small cost to how "blended" the grain looks.
+      className="pointer-events-none fixed inset-0 z-[65] opacity-[0.05]"
       style={{
         backgroundImage: `url("data:image/svg+xml,${NOISE_SVG}")`,
         backgroundRepeat: "repeat",
