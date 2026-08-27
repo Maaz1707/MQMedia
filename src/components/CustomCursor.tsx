@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
   const [isFinePointer, setIsFinePointer] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [label, setLabel] = useState<string | null>(null);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -42,6 +43,8 @@ export default function CustomCursor() {
 
       const target = e.target as HTMLElement;
       setIsHovering(Boolean(target.closest("a, button, [data-cursor-hover]")));
+      const labelEl = target.closest("[data-cursor-text]");
+      setLabel(labelEl ? labelEl.getAttribute("data-cursor-text") : null);
     };
 
     const handleLeave = () => setIsVisible(false);
@@ -71,20 +74,34 @@ export default function CustomCursor() {
       />
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-[100] rounded-full border border-gold"
+        className="pointer-events-none fixed left-0 top-0 z-[100] flex items-center justify-center rounded-full border border-gold bg-background/40 backdrop-blur-[1px]"
         style={{
           x: ringX,
           y: ringY,
           translateX: "-50%",
           translateY: "-50%",
-          opacity: isVisible ? (isHovering ? 0.9 : 0.5) : 0,
+          opacity: isVisible ? (isHovering ? 0.95 : 0.5) : 0,
         }}
         animate={{
-          width: isHovering ? 52 : 28,
-          height: isHovering ? 52 : 28,
+          width: label ? 68 : isHovering ? 52 : 28,
+          height: label ? 68 : isHovering ? 52 : 28,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 26 }}
-      />
+      >
+        <AnimatePresence>
+          {label && (
+            <motion.span
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.7 }}
+              transition={{ duration: 0.18 }}
+              className="text-[10px] font-medium uppercase tracking-[0.1em] text-gold"
+            >
+              {label}
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </motion.div>
     </>
   );
 }

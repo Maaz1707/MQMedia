@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Logo from "./Logo";
 import Magnetic from "./Magnetic";
 import { NAV_SECTIONS } from "@/lib/site-config";
@@ -8,6 +9,15 @@ import { NAV_SECTIONS } from "@/lib/site-config";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState<string>("");
+  const [scrolled, setScrolled] = useState(false);
+
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, "change", (v) => {
+    setScrolled((prev) => {
+      const next = v > 40;
+      return prev === next ? prev : next;
+    });
+  });
 
   useEffect(() => {
     const sections = NAV_SECTIONS.map((s) => document.getElementById(s.id)).filter(
@@ -30,27 +40,39 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <header
+      className={`sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md transition-shadow duration-300 ${
+        scrolled ? "shadow-[0_8px_30px_-16px_rgba(0,0,0,0.6)]" : ""
+      }`}
+    >
+      <nav
+        className={`mx-auto flex max-w-6xl items-center justify-between px-6 transition-[padding] duration-300 ${
+          scrolled ? "py-2.5" : "py-4"
+        }`}
+      >
         <a href="#hero" onClick={() => setOpen(false)}>
-          <Logo size={40} />
+          <motion.div animate={{ scale: scrolled ? 0.82 : 1 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }} className="origin-left">
+            <Logo size={40} />
+          </motion.div>
         </a>
 
         <ul className="hidden items-center gap-7 lg:flex">
           {NAV_SECTIONS.map((section) => (
-            <li key={section.id}>
+            <li key={section.id} className="relative">
               <a
                 href={`#${section.id}`}
-                className={`group relative inline-block py-1 text-xs uppercase tracking-[0.15em] transition-colors hover:text-gold ${
+                className={`relative inline-block py-1 text-xs uppercase tracking-[0.15em] transition-colors hover:text-gold ${
                   activeId === section.id ? "text-gold" : "text-foreground/70"
                 }`}
               >
                 {section.label}
-                <span
-                  className={`absolute -bottom-0.5 left-0 h-px w-full origin-left bg-gold transition-transform duration-300 ${
-                    activeId === section.id ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                  }`}
-                />
+                {activeId === section.id && (
+                  <motion.span
+                    layoutId="nav-active-underline"
+                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                    className="absolute -bottom-0.5 left-0 h-px w-full bg-gold"
+                  />
+                )}
               </a>
             </li>
           ))}
