@@ -1,17 +1,10 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
-import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform, useVelocity, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import Magnetic from "@/components/Magnetic";
 import TextReveal from "@/components/TextReveal";
 import { INTRO_TOTAL_S } from "@/lib/motion";
-
-const HeroScene = dynamic(() => import("@/components/three/HeroScene"), {
-  ssr: false,
-  loading: () => null,
-});
 
 const container = {
   hidden: {},
@@ -30,21 +23,8 @@ const item = {
 };
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const canvasOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
-
-  const { scrollY } = useScroll();
-  const rawVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(rawVelocity, { stiffness: 260, damping: 32 });
-
   return (
     <section
-      ref={sectionRef}
       id="hero"
       className="bg-noise relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center"
     >
@@ -61,15 +41,7 @@ export default function Hero() {
       </div>
 
       <motion.div
-        aria-hidden="true"
-        style={{ opacity: canvasOpacity }}
-        className="pointer-events-none absolute inset-0"
-      >
-        <HeroScene scrollProgress={scrollYProgress} velocity={smoothVelocity} />
-      </motion.div>
-
-      <motion.div
-        className="relative"
+        className="relative z-10"
         variants={container}
         initial="hidden"
         animate="visible"

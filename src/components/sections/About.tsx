@@ -6,7 +6,7 @@ export default function About() {
   return (
     <section id="about" className="section-divider relative overflow-hidden px-6 py-32 md:py-48">
       <SectionBackground src="/images/about.webp" />
-      <div className="relative mx-auto max-w-3xl">
+      <div className="relative z-10 mx-auto max-w-3xl">
         <Reveal>
           <p className="text-center text-xs uppercase tracking-[0.3em] text-gold">
             About MQ Media

@@ -16,11 +16,14 @@ function PrecisionRing({ scrollProgress }: { scrollProgress: MotionValue<number>
   const group = useRef<THREE.Group>(null);
   const outer = useRef<THREE.Mesh>(null);
   const inner = useRef<THREE.Mesh>(null);
-  const pointerTilt = useRef(0);
+  const pointerTarget = useRef({ x: 0, y: 0 });
+  const pointerSmooth = useRef({ x: 0, y: 0 });
+  const baseSpin = useRef(0);
 
   useEffect(() => {
     const handle = (e: PointerEvent) => {
-      pointerTilt.current = e.clientY / window.innerHeight - 0.5;
+      pointerTarget.current.x = e.clientX / window.innerWidth - 0.5;
+      pointerTarget.current.y = e.clientY / window.innerHeight - 0.5;
     };
     window.addEventListener("pointermove", handle);
     return () => window.removeEventListener("pointermove", handle);
@@ -30,8 +33,15 @@ function PrecisionRing({ scrollProgress }: { scrollProgress: MotionValue<number>
     if (!group.current || !outer.current || !inner.current) return;
     const scroll = scrollProgress.get();
 
-    group.current.rotation.x = 0.5 + scroll * Math.PI * 0.6 + pointerTilt.current * 0.2;
-    group.current.rotation.y += delta * 0.12;
+    // Lerp toward the latest pointer reading each frame instead of snapping
+    // straight to it, so the ring visibly "follows" the cursor rather than
+    // jumping — the tactile, responsive feel the hero interaction is for.
+    pointerSmooth.current.x = THREE.MathUtils.lerp(pointerSmooth.current.x, pointerTarget.current.x, 0.06);
+    pointerSmooth.current.y = THREE.MathUtils.lerp(pointerSmooth.current.y, pointerTarget.current.y, 0.06);
+    baseSpin.current += delta * 0.12;
+
+    group.current.rotation.x = 0.5 + scroll * Math.PI * 0.6 + pointerSmooth.current.y * 0.45;
+    group.current.rotation.y = baseSpin.current + pointerSmooth.current.x * 0.55;
     group.current.scale.setScalar(1 - scroll * 0.1);
 
     outer.current.rotation.z += delta * 0.06;
