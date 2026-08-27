@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
+import SectionBackground from "@/components/SectionBackground";
 import { DiscoveryIcon, DesignIcon, BuildIcon, LaunchIcon } from "@/components/Icons";
 
 const STEPS = [
@@ -46,8 +47,9 @@ export default function Process() {
   });
 
   return (
-    <section id="process" className="section-divider bg-background-alt px-6 py-32 md:py-40">
-      <div className="mx-auto max-w-5xl">
+    <section id="process" className="section-divider relative overflow-hidden bg-background-alt px-6 py-32 md:py-40">
+      <SectionBackground src="/images/process.webp" />
+      <div className="relative mx-auto max-w-5xl">
         <Reveal className="text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-gold">
             How We Work

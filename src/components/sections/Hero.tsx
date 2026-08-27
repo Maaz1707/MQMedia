@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform, useVelocity, useSpring } from "framer-motion";
 import Magnetic from "@/components/Magnetic";
@@ -47,6 +48,18 @@ export default function Hero() {
       id="hero"
       className="bg-noise relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center"
     >
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <Image
+          src="/images/hero.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-[0.32]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
+      </div>
+
       <motion.div
         aria-hidden="true"
         style={{ opacity: canvasOpacity }}

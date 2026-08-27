@@ -1,11 +1,11 @@
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
-import ParallaxGlow from "@/components/ParallaxGlow";
+import SectionBackground from "@/components/SectionBackground";
 
 export default function About() {
   return (
     <section id="about" className="section-divider relative overflow-hidden px-6 py-32 md:py-48">
-      <ParallaxGlow className="left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2" />
+      <SectionBackground src="/images/about.webp" />
       <div className="relative mx-auto max-w-3xl">
         <Reveal>
           <p className="text-center text-xs uppercase tracking-[0.3em] text-gold">

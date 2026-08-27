@@ -42,3 +42,6 @@ next-env.d.ts
 
 # claude code harness
 .claude/scheduled_tasks.lock
+
+# local scratch working files (raw source images, not part of the site)
+/scratch_images

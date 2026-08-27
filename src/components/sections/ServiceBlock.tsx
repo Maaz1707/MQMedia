@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import TiltCard from "@/components/TiltCard";
@@ -51,10 +52,17 @@ export default function ServiceBlock({
             <div
               aria-hidden="true"
               data-cursor-hover
-              className="bg-noise group relative flex aspect-square items-center justify-center overflow-hidden border border-border transition-colors duration-500 hover:border-gold/50"
+              className="group relative flex aspect-square items-center justify-center overflow-hidden border border-border transition-colors duration-500 hover:border-gold/50"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-gold/[0.06] via-transparent to-transparent transition-opacity duration-500 group-hover:from-gold/[0.12]" />
-              <Icon className="relative h-24 w-24 text-gold transition-transform duration-700 ease-out group-hover:scale-110 md:h-32 md:w-32" />
+              <Image
+                src={`/images/${icon}.webp`}
+                alt=""
+                fill
+                sizes="(min-width: 768px) 40vw, 90vw"
+                className="object-cover opacity-60 transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-background/40 via-background/70 to-background/90 transition-opacity duration-500 group-hover:from-background/30" />
+              <Icon className="relative h-24 w-24 text-gold drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-out group-hover:scale-110 md:h-32 md:w-32" />
               <span className="font-display absolute bottom-6 right-6 text-sm text-gold-dark/60">
                 {index}
               </span>

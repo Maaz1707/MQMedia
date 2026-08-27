@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
+import SectionBackground from "@/components/SectionBackground";
 
 type Bar = { label: string; level: number; note: string };
 
@@ -43,8 +44,9 @@ const CATEGORIES: { category: string; bars: Bar[] }[] = [
 
 export default function WhyMQ() {
   return (
-    <section id="why-mq" className="section-divider bg-background-alt px-6 py-32 md:py-40">
-      <div className="mx-auto max-w-4xl">
+    <section id="why-mq" className="section-divider relative overflow-hidden bg-background-alt px-6 py-32 md:py-40">
+      <SectionBackground src="/images/whymq.webp" />
+      <div className="relative mx-auto max-w-4xl">
         <Reveal className="text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-gold">
             Why MQ

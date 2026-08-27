@@ -1,14 +1,16 @@
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
 import ContactForm from "@/components/contact/ContactForm";
+import SectionBackground from "@/components/SectionBackground";
 import { SITE_CONFIG, whatsappLink } from "@/lib/site-config";
 
 const SOCIAL_ENTRIES = Object.entries(SITE_CONFIG.social).filter(([, url]) => url);
 
 export default function Contact() {
   return (
-    <section id="contact" className="section-divider bg-noise px-6 py-32 md:py-40">
-      <div className="mx-auto max-w-6xl">
+    <section id="contact" className="section-divider bg-noise relative overflow-hidden px-6 py-32 md:py-40">
+      <SectionBackground src="/images/contact.webp" />
+      <div className="relative mx-auto max-w-6xl">
         <Reveal className="text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-gold">
             Get in Touch
