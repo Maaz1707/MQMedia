@@ -119,3 +119,47 @@ section[id] {
   cursor: none;
 }
 
+/* Service-page hero visuals (ServiceHero.tsx) — pure CSS keyframes so
+   they run independent of any JS animation loop, transform/opacity only. */
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg) translateX(var(--orbit-radius, 90px)) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(var(--orbit-radius, 90px)) rotate(-360deg);
+  }
+}
+
+@keyframes gentle-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--tile-rotate, 0deg));
+  }
+  50% {
+    transform: translateY(-10px) rotate(var(--tile-rotate, 0deg));
+  }
+}
+
+@keyframes slow-flip {
+  0%,
+  40% {
+    transform: rotateY(0deg);
+  }
+  50%,
+  90% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+

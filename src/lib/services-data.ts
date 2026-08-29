@@ -1,7 +1,15 @@
 import type { ServiceIconKey } from "@/components/Icons";
 
+export type ServiceSlug =
+  | "branding"
+  | "web-development"
+  | "catalogue-design"
+  | "seo-growth"
+  | "smma";
+
 export type ServiceData = {
   index: string;
+  slug: ServiceSlug;
   icon: ServiceIconKey;
   title: string;
   description: string;
@@ -12,6 +20,7 @@ export type ServiceData = {
 export const SERVICES: ServiceData[] = [
   {
     index: "01",
+    slug: "branding",
     icon: "branding",
     title: "Branding & Identity",
     description: "A distinct identity is how you stop competing on price.",
@@ -21,6 +30,7 @@ export const SERVICES: ServiceData[] = [
   },
   {
     index: "02",
+    slug: "web-development",
     icon: "webdev",
     title: "Web Design & Development",
     description: "Built to convert, not just to exist.",
@@ -29,6 +39,7 @@ export const SERVICES: ServiceData[] = [
   },
   {
     index: "03",
+    slug: "catalogue-design",
     icon: "catalogue",
     title: "Catalogue & Print Design",
     description: "Designed to be picked up, not skimmed.",
@@ -37,6 +48,7 @@ export const SERVICES: ServiceData[] = [
   },
   {
     index: "04",
+    slug: "seo-growth",
     icon: "seo",
     title: "SEO & Growth Marketing",
     description: "Found by buyers already searching for you.",
@@ -45,6 +57,7 @@ export const SERVICES: ServiceData[] = [
   },
   {
     index: "05",
+    slug: "smma",
     icon: "smma",
     title: "SMMA",
     description: "A presence that reflects the business behind it.",
@@ -52,3 +65,7 @@ export const SERVICES: ServiceData[] = [
     outcome: "A social presence that closes deals, not just impressions.",
   },
 ];
+
+export function serviceForSlug(slug: string): ServiceData | undefined {
+  return SERVICES.find((s) => s.slug === slug);
+}
