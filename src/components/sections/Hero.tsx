@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Magnetic from "@/components/Magnetic";
 import TextReveal from "@/components/TextReveal";
+import ParticleConstellation from "@/components/ParticleConstellation";
 import { INTRO_TOTAL_S } from "@/lib/motion";
 
 const container = {
@@ -39,6 +40,8 @@ export default function Hero() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
       </div>
+
+      <ParticleConstellation />
 
       <motion.div
         className="relative z-10"

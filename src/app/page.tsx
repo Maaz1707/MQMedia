@@ -6,12 +6,10 @@ import Process from "@/components/sections/Process";
 import Work from "@/components/sections/Work";
 import WhyMQ from "@/components/sections/WhyMQ";
 import Contact from "@/components/sections/Contact";
-import HeroSceneHandoff from "@/components/three/HeroSceneHandoff";
 
 export default function Home() {
   return (
     <>
-      <HeroSceneHandoff />
       <Hero />
       <About />
       <Stats />
