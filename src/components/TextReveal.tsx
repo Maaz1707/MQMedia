@@ -31,9 +31,10 @@ export default function TextReveal({
         <span key={i} className="inline-block overflow-hidden pb-[0.1em]">
           <motion.span
             className="inline-block"
+            style={{ transformPerspective: 400 }}
             variants={{
-              hidden: { y: "110%" },
-              visible: { y: "0%" },
+              hidden: { y: "110%", rotateX: -55 },
+              visible: { y: "0%", rotateX: 0 },
             }}
             {...motionProps}
             transition={{

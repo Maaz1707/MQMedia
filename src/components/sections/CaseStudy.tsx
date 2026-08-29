@@ -41,10 +41,11 @@ export default function CaseStudy({
           return (
             <motion.div
               key={mockup.alt}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.85, rotateX: 20, y: 40 }}
+              whileInView={{ opacity: 1, scale: 1, rotateX: 0, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.9, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              style={{ transformPerspective: 1200 }}
             >
               <motion.div
                 layoutId={layoutId}

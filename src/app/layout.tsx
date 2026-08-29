@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
+import ScrollSpine from "@/components/ScrollSpine";
 import PageIntro from "@/components/PageIntro";
 import AmbientBackground from "@/components/AmbientBackground";
 import GrainOverlay from "@/components/GrainOverlay";
@@ -90,6 +91,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <GrainOverlay />
         <PageIntro />
         <ScrollProgress />
+        <ScrollSpine />
         <CustomCursor />
         <Navbar />
         <main className="flex-1">{children}</main>
