@@ -2,13 +2,16 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import TiltCard from "@/components/TiltCard";
 import { SERVICE_ICON_MAP, type ServiceIconKey } from "@/components/Icons";
+import type { ServiceSlug } from "@/lib/services-data";
 
 type ServiceBlockProps = {
   index: string;
+  slug: ServiceSlug;
   icon: ServiceIconKey;
   title: string;
   description: string;
@@ -19,6 +22,7 @@ type ServiceBlockProps = {
 
 export default function ServiceBlock({
   index,
+  slug,
   icon,
   title,
   description,
@@ -27,7 +31,7 @@ export default function ServiceBlock({
   reversed = false,
 }: ServiceBlockProps) {
   const Icon = SERVICE_ICON_MAP[icon];
-  const blockRef = useRef<HTMLDivElement>(null);
+  const blockRef = useRef<HTMLAnchorElement>(null);
 
   // Layered parallax: the visual panel drifts against the text at a
   // different rate as the block scrolls through the viewport, giving it
@@ -40,9 +44,12 @@ export default function ServiceBlock({
   const textY = useTransform(scrollYProgress, [0, 1], [20, -20]);
 
   return (
-    <div
+    <Link
       ref={blockRef}
-      className={`section-divider mx-auto grid max-w-6xl grid-cols-1 items-center gap-14 overflow-hidden px-6 py-24 md:grid-cols-2 ${
+      href={`/services/${slug}`}
+      data-cursor-hover
+      data-cursor-text="Explore"
+      className={`group section-divider mx-auto grid max-w-6xl grid-cols-1 items-center gap-14 overflow-hidden px-6 py-24 md:grid-cols-2 ${
         reversed ? "md:[&>*:first-child]:order-2" : ""
       }`}
     >
@@ -99,8 +106,13 @@ export default function ServiceBlock({
           <p className="mt-7 border-l-2 border-gold/50 pl-4 text-base italic leading-relaxed text-gold-light">
             {outcome}
           </p>
+
+          <span className="mt-7 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold-dark transition-colors duration-300 group-hover:text-gold">
+            Explore This Service
+            <span className="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+          </span>
         </motion.div>
       </Reveal>
-    </div>
+    </Link>
   );
 }

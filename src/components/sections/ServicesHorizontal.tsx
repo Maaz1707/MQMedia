@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import TiltCard from "@/components/TiltCard";
 import TextReveal from "@/components/TextReveal";
@@ -38,7 +39,13 @@ export default function ServicesHorizontal() {
           {SERVICES.map((service) => {
             const Icon = SERVICE_ICON_MAP[service.icon];
             return (
-              <div key={service.index} className="flex h-full w-screen shrink-0 items-center px-24">
+              <Link
+                key={service.index}
+                href={`/services/${service.slug}`}
+                data-cursor-hover
+                data-cursor-text="Explore"
+                className="group flex h-full w-screen shrink-0 items-center px-24"
+              >
                 <div className="mx-auto grid w-full max-w-6xl grid-cols-2 items-center gap-16">
                   <TiltCard>
                     <div
@@ -84,9 +91,14 @@ export default function ServicesHorizontal() {
                     <p className="mt-7 border-l-2 border-gold/50 pl-4 text-base italic leading-relaxed text-gold-light">
                       {service.outcome}
                     </p>
+
+                    <span className="mt-7 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold-dark transition-colors duration-300 group-hover:text-gold">
+                      Explore This Service
+                      <span className="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+                    </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </motion.div>
