@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
-import { motion, AnimatePresence, useMotionValue, useTransform, animate, useMotionValueEvent } from "framer-motion";
+import { motion, useMotionValue, useTransform, animate, useMotionValueEvent } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
 import SectionBackground from "@/components/SectionBackground";
@@ -99,12 +99,15 @@ export default function WhyMQ() {
             <TextReveal text="Not a Freelancer. Not a Slow Agency." />
           </h2>
           <p className="mx-auto mt-5 max-w-md text-sm text-muted md:text-base">
-            Drag the control, or tap a column, to compare.
+            Every column is compared below — drag or tap to spotlight one.
           </p>
         </Reveal>
 
+        {/* The three buttons are the real, fully keyboard-operable control —
+            spotlighting a column is entirely achievable without the drag
+            track below, which exists purely as a mouse/touch convenience. */}
         <Reveal delay={0.15} className="mt-16">
-          <div className="flex justify-between px-1">
+          <div className="flex justify-between px-1" role="group" aria-label="Spotlight a column">
             {COLUMNS.map((col, i) => {
               const isActive = active === i;
               const isMQ = i === 2;
@@ -114,7 +117,8 @@ export default function WhyMQ() {
                   type="button"
                   data-cursor-hover
                   onClick={() => settleTo(i)}
-                  className={`relative px-2 py-2 text-xs uppercase tracking-[0.15em] transition-all duration-300 sm:text-sm ${
+                  aria-pressed={isActive}
+                  className={`relative px-3 py-3 text-xs uppercase tracking-[0.15em] transition-all duration-300 sm:text-sm ${
                     isActive
                       ? isMQ
                         ? "scale-110 text-gold"
@@ -135,6 +139,7 @@ export default function WhyMQ() {
 
           <div
             ref={trackRef}
+            aria-hidden="true"
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
@@ -147,48 +152,61 @@ export default function WhyMQ() {
               ))}
             </div>
             <motion.div
-              data-cursor-hover
               style={{ left: handleLeft }}
               className="absolute top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-gold bg-background shadow-[0_0_16px_rgba(212,175,55,0.5)]"
             />
           </div>
         </Reveal>
 
-        <div className="mt-16 flex flex-col gap-3">
+        {/* All three columns' values are always in the markup for every
+            category — the spotlight only adds visual emphasis, it never
+            hides the other two, so nothing here is drag-only information. */}
+        <div className="mt-16 flex flex-col gap-8">
           {CATEGORIES.map((cat, ci) => (
             <Reveal key={cat.category} delay={ci * 0.06}>
-              <div
-                className={`border border-border/70 px-6 py-5 transition-colors duration-500 ${
-                  active === 2 ? "border-gold/30 bg-gold/[0.03]" : ""
-                }`}
-              >
-                <div className="flex items-baseline justify-between">
-                  <h3 className="font-display text-base text-foreground md:text-lg">{cat.category}</h3>
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={`${cat.category}-${active}`}
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                      className={`text-xs ${active === 2 ? "text-gold" : "text-muted"}`}
+              <h3 className="font-display text-base text-foreground md:text-lg">{cat.category}</h3>
+              <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                {COLUMNS.map((col, i) => {
+                  const isSelected = active === i;
+                  const isMQ = i === 2;
+                  return (
+                    <div
+                      key={col}
+                      className={`border px-4 py-4 transition-colors duration-500 ${
+                        isSelected
+                          ? isMQ
+                            ? "border-gold/40 bg-gold/[0.05]"
+                            : "border-foreground/25 bg-surface/60"
+                          : "border-border/60"
+                      }`}
                     >
-                      {cat.row.note[active]}
-                    </motion.span>
-                  </AnimatePresence>
-                </div>
-                <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-border/60">
-                  <motion.div
-                    key={`bar-${cat.category}-${active}`}
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: cat.row.level[active] }}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ transformOrigin: "left" }}
-                    className={`h-full rounded-full ${
-                      active === 2 ? "bg-gradient-to-r from-gold-dark via-gold to-gold-light" : "bg-muted/50"
-                    }`}
-                  />
-                </div>
+                      <div className="flex items-baseline justify-between gap-2 text-xs">
+                        <span
+                          className={
+                            isMQ ? "font-medium uppercase tracking-[0.1em] text-gold" : "uppercase tracking-[0.1em] text-muted"
+                          }
+                        >
+                          {col}
+                        </span>
+                        <span className={isSelected ? "text-foreground/90" : "text-muted"}>
+                          {cat.row.note[i]}
+                        </span>
+                      </div>
+                      <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-border/60">
+                        <motion.div
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: cat.row.level[i] }}
+                          viewport={{ once: true, margin: "-60px" }}
+                          transition={{ duration: 0.7, delay: ci * 0.05 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                          style={{ transformOrigin: "left" }}
+                          className={`h-full rounded-full ${
+                            isMQ ? "bg-gradient-to-r from-gold-dark via-gold to-gold-light" : "bg-muted/50"
+                          }`}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </Reveal>
           ))}
