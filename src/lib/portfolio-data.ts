@@ -51,3 +51,15 @@ export const PROJECTS: Project[] = [
 export function projectsForService(slug: ServiceSlug): Project[] {
   return PROJECTS.filter((p) => p.services.includes(slug));
 }
+
+// "Projects shipped" for the homepage stat is intentionally NOT just
+// PROJECTS.length — the portfolio only shows a curated subset, and the
+// real total may be higher. Defaults to the count actually shown (the
+// only number we can verify without guessing) until a real figure is
+// confirmed via env var. See TODO_BEFORE_LAUNCH.md.
+const rawProjectsShipped = process.env.NEXT_PUBLIC_PROJECTS_SHIPPED_COUNT;
+const parsedProjectsShipped = rawProjectsShipped ? Number(rawProjectsShipped) : NaN;
+export const PROJECTS_SHIPPED_COUNT =
+  Number.isFinite(parsedProjectsShipped) && parsedProjectsShipped > 0
+    ? parsedProjectsShipped
+    : PROJECTS.length;
