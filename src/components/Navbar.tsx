@@ -16,6 +16,11 @@ export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const currentService = !isHome ? serviceForSlug(pathname.split("/")[2] ?? "") : undefined;
+  const bookACallHref = isHome
+    ? "#contact"
+    : currentService
+      ? `/?service=${currentService.slug}#contact`
+      : "/#contact";
 
   const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (v) => {
@@ -105,7 +110,7 @@ export default function Navbar() {
 
         <Magnetic className="hidden lg:inline-block">
           <Link
-            href={isHome ? "#contact" : "/#contact"}
+            href={bookACallHref}
             data-cursor-hover
             className="block border border-gold/50 px-5 py-2 text-xs uppercase tracking-[0.15em] text-gold transition-colors duration-300 hover:bg-gold hover:text-background"
           >
@@ -178,7 +183,7 @@ export default function Navbar() {
               </li>
               <li>
                 <Link
-                  href="/#contact"
+                  href={bookACallHref}
                   onClick={() => setOpen(false)}
                   className="mt-2 inline-block border border-gold/50 px-5 py-2 text-xs uppercase tracking-[0.15em] text-gold"
                 >

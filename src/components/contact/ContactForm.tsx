@@ -1,19 +1,30 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Magnetic from "@/components/Magnetic";
+import { SERVICES, serviceForSlug } from "@/lib/services-data";
 
-const SERVICES = ["Design", "Web Development", "SMMA", "Catalogue Making", "Other"];
+const SERVICE_OPTIONS = [...SERVICES.map((s) => s.title), "Other"];
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const searchParams = useSearchParams();
+
+  // /?service=<slug>#contact prefill, e.g. from a service page's CTA.
+  // Falls back to the first option if the slug is missing/unrecognized.
+  const prefillTitle = serviceForSlug(searchParams.get("service") ?? "")?.title;
+  const defaultService =
+    prefillTitle && SERVICE_OPTIONS.includes(prefillTitle) ? prefillTitle : SERVICE_OPTIONS[0];
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("submitting");
+    setErrorMessage("");
 
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
@@ -25,11 +36,20 @@ export default function ContactForm() {
         body: JSON.stringify(data),
       });
 
-      if (!res.ok) throw new Error("Request failed");
+      const result = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setErrorMessage(
+          typeof result.error === "string" ? result.error : "Something went wrong. Please try again."
+        );
+        setStatus("error");
+        return;
+      }
 
       setStatus("success");
       form.reset();
     } catch {
+      setErrorMessage("Something went wrong. Please check your connection and try again.");
       setStatus("error");
     }
   }
@@ -51,7 +71,16 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit} className="relative flex flex-col gap-5">
+      {/* Honeypot: hidden from sighted and screen-reader users alike
+          (aria-hidden + tabIndex -1 + off-screen position, not display:none
+          — some bots skip fields that are display:none but still fill
+          positioned-off-screen ones). Real visitors never see or fill it. */}
+      <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden">
+        <label htmlFor="company">Company</label>
+        <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="text-xs uppercase tracking-[0.15em] text-muted">
@@ -86,10 +115,10 @@ export default function ContactForm() {
         <select
           id="service"
           name="service"
-          defaultValue="Design"
+          defaultValue={defaultService}
           className="mt-2 w-full border border-border bg-surface px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-gold"
         >
-          {SERVICES.map((s) => (
+          {SERVICE_OPTIONS.map((s) => (
             <option key={s} value={s}>
               {s}
             </option>
@@ -105,6 +134,7 @@ export default function ContactForm() {
           id="message"
           name="message"
           required
+          minLength={10}
           rows={5}
           className="mt-2 w-full resize-none border border-border bg-surface px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-gold"
         />
@@ -112,11 +142,12 @@ export default function ContactForm() {
 
       {status === "error" && (
         <motion.p
+          role="alert"
           initial={{ opacity: 0, x: -6 }}
           animate={{ opacity: 1, x: 0 }}
           className="text-sm text-red-400"
         >
-          Something went wrong. Please try again.
+          {errorMessage || "Something went wrong. Please try again."}
         </motion.p>
       )}
 

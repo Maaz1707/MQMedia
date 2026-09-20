@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
 import ContactForm from "@/components/contact/ContactForm";
@@ -21,8 +22,9 @@ export default function Contact() {
             <TextReveal text="Let's Build Something Precise" />
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            Tell us about your project and we&apos;ll get back to you within
-            one business day.
+            {SITE_CONFIG.showResponseTimePromise
+              ? "Tell us about your project and we'll get back to you within one business day."
+              : "Tell us about your project and we'll get back to you."}
           </p>
         </Reveal>
 
@@ -79,7 +81,9 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <ContactForm />
+            <Suspense fallback={<div className="h-[520px]" aria-hidden="true" />}>
+              <ContactForm />
+            </Suspense>
           </Reveal>
         </div>
       </div>

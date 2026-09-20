@@ -47,6 +47,10 @@ export const SITE_CONFIG = {
     facebook: "", // TODO: add once live
     linkedin: "",
   },
+  // The "we'll get back to you within one business day" promise is a real
+  // commitment, not filler copy — default on, but a single env flag turns
+  // it off everywhere if that response time ever stops being true.
+  showResponseTimePromise: process.env.NEXT_PUBLIC_SHOW_RESPONSE_TIME_PROMISE !== "false",
 };
 
 export function whatsappLink(

@@ -95,6 +95,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
         headline={content.heroHeadline}
         subline={content.heroSubline}
         variant={content.heroVariant}
+        slug={slug as ServiceSlug}
       />
       <IncludedBreakdown intro={content.includedIntro} items={content.included} />
       <ServiceProcess steps={content.process} />
@@ -102,7 +103,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       <RelevantPortfolio projects={relatedProjects} />
       <ServiceFAQ items={content.faq} />
       <CrossSell currentSlug={slug as ServiceSlug} />
-      <ServiceFinalCTA serviceTitle={service.title} />
+      <ServiceFinalCTA serviceTitle={service.title} slug={slug as ServiceSlug} />
     </>
   );
 }

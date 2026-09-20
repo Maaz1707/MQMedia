@@ -20,3 +20,14 @@ fix number from the audit. Resolve these before this goes live.
       `NEXT_PUBLIC_PROJECTS_SHIPPED_COUNT` accordingly. Currently defaults
       to 4 (the number of projects actually shown), which is honest but
       may understate the real total.
+
+## Fix 5 — Contact form delivery
+- [ ] **Important**: the contact form does not actually deliver email
+      anywhere yet. Sign up at resend.com, verify a sending domain (or
+      use their shared test sender for now), and set `RESEND_API_KEY`
+      (and optionally `RESEND_FROM_EMAIL`) in Vercel's env vars. Until
+      then, submissions are validated and logged server-side only —
+      real enquiries will be silently lost if this ships without it.
+- [ ] Confirm the "within one business day" response-time promise in
+      the Contact section is one you can actually keep. If not, set
+      `NEXT_PUBLIC_SHOW_RESPONSE_TIME_PROMISE=false`.

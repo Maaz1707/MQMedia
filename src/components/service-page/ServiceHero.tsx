@@ -1,16 +1,19 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import Magnetic from "@/components/Magnetic";
 import TextReveal from "@/components/TextReveal";
 import ServiceHeroVisual from "./ServiceHeroVisual";
 import type { HeroVariant } from "@/lib/service-pages-data";
+import type { ServiceSlug } from "@/lib/services-data";
 
 type ServiceHeroProps = {
   eyebrow: string;
   headline: string;
   subline: string;
   variant: HeroVariant;
+  slug: ServiceSlug;
 };
 
 const container = {
@@ -23,7 +26,7 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
-export default function ServiceHero({ eyebrow, headline, subline, variant }: ServiceHeroProps) {
+export default function ServiceHero({ eyebrow, headline, subline, variant, slug }: ServiceHeroProps) {
   return (
     <section className="bg-noise relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-24 text-center">
       <div
@@ -50,13 +53,13 @@ export default function ServiceHero({ eyebrow, headline, subline, variant }: Ser
 
         <motion.div variants={item} className="mt-12 flex flex-col gap-4 sm:flex-row sm:justify-center">
           <Magnetic>
-            <a
-              href="#contact-cta"
+            <Link
+              href={`/?service=${slug}#contact`}
               data-cursor-hover
               className="block border border-gold bg-gold px-9 py-4 text-xs uppercase tracking-[0.15em] text-background transition-colors duration-300 hover:bg-transparent hover:text-gold"
             >
               Book a Call
-            </a>
+            </Link>
           </Magnetic>
           <Magnetic>
             <a

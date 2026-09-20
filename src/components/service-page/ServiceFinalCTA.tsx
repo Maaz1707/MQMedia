@@ -2,8 +2,15 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
 import Magnetic from "@/components/Magnetic";
+import type { ServiceSlug } from "@/lib/services-data";
 
-export default function ServiceFinalCTA({ serviceTitle }: { serviceTitle: string }) {
+export default function ServiceFinalCTA({
+  serviceTitle,
+  slug,
+}: {
+  serviceTitle: string;
+  slug: ServiceSlug;
+}) {
   return (
     <section id="contact-cta" className="section-divider bg-noise relative px-6 py-28 text-center md:py-40">
       <div className="relative mx-auto max-w-2xl">
@@ -21,7 +28,7 @@ export default function ServiceFinalCTA({ serviceTitle }: { serviceTitle: string
         <Reveal delay={0.15} className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
           <Magnetic>
             <Link
-              href="/#contact"
+              href={`/?service=${slug}#contact`}
               data-cursor-hover
               className="block border border-gold bg-gold px-9 py-4 text-xs uppercase tracking-[0.15em] text-background transition-colors duration-300 hover:bg-transparent hover:text-gold"
             >
