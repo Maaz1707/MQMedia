@@ -42,6 +42,27 @@ export default function Contact() {
                   {SITE_CONFIG.contactEmail}
                 </p>
               </li>
+              {SITE_CONFIG.phone && (
+                <li>
+                  <p className="text-xs uppercase tracking-[0.2em] text-gold">
+                    Phone
+                  </p>
+                  <a
+                    href={`tel:${SITE_CONFIG.phone.replace(/[^\d+]/g, "")}`}
+                    className="mt-1 inline-block text-sm text-foreground/90 hover:text-gold"
+                  >
+                    {SITE_CONFIG.phone}
+                  </a>
+                </li>
+              )}
+              {SITE_CONFIG.location && (
+                <li>
+                  <p className="text-xs uppercase tracking-[0.2em] text-gold">
+                    Location
+                  </p>
+                  <p className="mt-1 text-sm text-foreground/90">{SITE_CONFIG.location}</p>
+                </li>
+              )}
               {whatsapp && (
                 <li>
                   <p className="text-xs uppercase tracking-[0.2em] text-gold">

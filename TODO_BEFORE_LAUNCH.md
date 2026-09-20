@@ -45,3 +45,14 @@ fix number from the audit. Resolve these before this goes live.
 - [ ] Confirm "a computer engineer" (replacing "a final-year engineering
       student") in the About section still reads as accurate for where
       you are now.
+
+## Fix 9 — Trust signals
+- [ ] Set `NEXT_PUBLIC_LOCATION` and/or `NEXT_PUBLIC_PHONE` if you want
+      them shown in Contact and Footer — both are hidden entirely while
+      unset, not shown as a placeholder.
+- [ ] Lighthouse was run against a production build — see
+      `docs/performance.md` for the real, measured scores (reported in
+      my summary too). Per instruction, I have **not** put any score in
+      the UI yet, since that needs your explicit approval first. Say the
+      word and I'll add a small proof point to the Web Development page
+      with the real numbers.

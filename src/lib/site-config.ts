@@ -58,6 +58,10 @@ export const SITE_CONFIG = {
   // naturally into different sentences at each call site.
   regionDescriptor:
     process.env.NEXT_PUBLIC_REGION_DESCRIPTOR ?? "for trade businesses across India and the GCC",
+  // Trust signals — both genuinely optional. Empty string when unset, so
+  // Contact/Footer render nothing rather than a placeholder.
+  location: process.env.NEXT_PUBLIC_LOCATION ?? "",
+  phone: process.env.NEXT_PUBLIC_PHONE ?? "",
 };
 
 export function whatsappLink(

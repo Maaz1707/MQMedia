@@ -17,6 +17,9 @@ export default function Footer() {
               Branding, web development, catalogue design, SEO and social
               media management {SITE_CONFIG.regionDescriptor}.
             </p>
+            {SITE_CONFIG.location && (
+              <p className="mt-4 text-sm text-muted">{SITE_CONFIG.location}</p>
+            )}
           </div>
 
           <div className="flex gap-16">
@@ -63,6 +66,16 @@ export default function Footer() {
                     Email
                   </a>
                 </li>
+                {SITE_CONFIG.phone && (
+                  <li>
+                    <a
+                      href={`tel:${SITE_CONFIG.phone.replace(/[^\d+]/g, "")}`}
+                      className="text-sm text-muted transition-colors hover:text-gold"
+                    >
+                      {SITE_CONFIG.phone}
+                    </a>
+                  </li>
+                )}
                 {SOCIAL_ENTRIES.map(([key, url]) => (
                   <li key={key}>
                     <a

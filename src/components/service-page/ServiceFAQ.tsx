@@ -8,32 +8,42 @@ import type { FaqItem } from "@/lib/service-pages-data";
 
 function FaqRow({ item, index }: { item: FaqItem; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
+  const buttonId = `faq-question-${index}`;
+  const panelId = `faq-answer-${index}`;
 
   return (
     <Reveal delay={index * 0.06}>
       <div className="border-b border-border">
-        <button
-          type="button"
-          onClick={() => setIsOpen((v) => !v)}
-          data-cursor-hover
-          aria-expanded={isOpen}
-          className="flex w-full items-center justify-between gap-6 py-6 text-left"
-        >
-          <span className="font-display text-base text-foreground md:text-lg">{item.question}</span>
-          <motion.span
-            animate={{ rotate: isOpen ? 45 : 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gold/40 text-gold"
+        <h3>
+          <button
+            id={buttonId}
+            type="button"
+            onClick={() => setIsOpen((v) => !v)}
+            data-cursor-hover
+            aria-expanded={isOpen}
+            aria-controls={panelId}
+            className="flex w-full items-center justify-between gap-6 py-6 text-left"
           >
-            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-          </motion.span>
-        </button>
+            <span className="font-display text-base text-foreground md:text-lg">{item.question}</span>
+            <motion.span
+              aria-hidden="true"
+              animate={{ rotate: isOpen ? 45 : 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gold/40 text-gold"
+            >
+              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </motion.span>
+          </button>
+        </h3>
         <AnimatePresence initial={false}>
           {isOpen && (
             <motion.div
+              id={panelId}
+              role="region"
+              aria-labelledby={buttonId}
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
