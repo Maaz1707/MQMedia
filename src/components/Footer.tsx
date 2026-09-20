@@ -5,6 +5,8 @@ import { NAV_SECTIONS, SITE_CONFIG, whatsappLink } from "@/lib/site-config";
 const SOCIAL_ENTRIES = Object.entries(SITE_CONFIG.social).filter(([, url]) => url);
 
 export default function Footer() {
+  const whatsapp = whatsappLink();
+
   return (
     <footer className="border-t border-border bg-background-alt">
       <div className="mx-auto max-w-6xl px-6 py-14">
@@ -41,16 +43,18 @@ export default function Footer() {
                 Connect
               </h3>
               <ul className="mt-4 flex flex-col gap-3">
-                <li>
-                  <a
-                    href={whatsappLink()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-muted transition-colors hover:text-gold"
-                  >
-                    WhatsApp
-                  </a>
-                </li>
+                {whatsapp && (
+                  <li>
+                    <a
+                      href={whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-muted transition-colors hover:text-gold"
+                    >
+                      WhatsApp
+                    </a>
+                  </li>
+                )}
                 <li>
                   <a
                     href={`mailto:${SITE_CONFIG.contactEmail}`}

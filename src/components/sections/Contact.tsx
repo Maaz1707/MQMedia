@@ -7,6 +7,8 @@ import { SITE_CONFIG, whatsappLink } from "@/lib/site-config";
 const SOCIAL_ENTRIES = Object.entries(SITE_CONFIG.social).filter(([, url]) => url);
 
 export default function Contact() {
+  const whatsapp = whatsappLink();
+
   return (
     <section id="contact" className="section-divider bg-noise relative overflow-hidden px-6 py-32 md:py-40">
       <SectionBackground src="/images/contact.webp" />
@@ -38,19 +40,21 @@ export default function Contact() {
                   {SITE_CONFIG.contactEmail}
                 </p>
               </li>
-              <li>
-                <p className="text-xs uppercase tracking-[0.2em] text-gold">
-                  WhatsApp
-                </p>
-                <a
-                  href={whatsappLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-1 inline-block text-sm text-foreground/90 underline underline-offset-4 hover:text-gold"
-                >
-                  Message us directly &rarr;
-                </a>
-              </li>
+              {whatsapp && (
+                <li>
+                  <p className="text-xs uppercase tracking-[0.2em] text-gold">
+                    WhatsApp
+                  </p>
+                  <a
+                    href={whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 inline-block text-sm text-foreground/90 underline underline-offset-4 hover:text-gold"
+                  >
+                    Message us directly &rarr;
+                  </a>
+                </li>
+              )}
               {SOCIAL_ENTRIES.length > 0 && (
                 <li>
                   <p className="text-xs uppercase tracking-[0.2em] text-gold">
