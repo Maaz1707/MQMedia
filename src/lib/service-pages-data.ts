@@ -15,6 +15,7 @@ export type ServicePageContent = {
   heroEyebrow: string;
   heroHeadline: string;
   heroSubline: string;
+  metaDescription: string;
   includedIntro: string;
   included: IncludedItem[];
   process: ProcessStep[];
@@ -30,6 +31,8 @@ export const SERVICE_PAGES: Record<ServiceSlug, ServicePageContent> = {
     heroHeadline: "An Identity Built to Be Remembered, Not Just Seen",
     heroSubline:
       "Most trade businesses inherit a logo and call it branding. We build the full system underneath it — the one that makes every touchpoint feel like the same company made it.",
+    metaDescription:
+      "Custom logo, identity system and brand guidelines for trade businesses that want to stop competing on price. See what's included and real branding work.",
     includedIntro:
       "Branding isn't a single deliverable — it's a system. Here's what's actually built when you commission identity work with MQ Media.",
     included: [
@@ -123,6 +126,8 @@ export const SERVICE_PAGES: Record<ServiceSlug, ServicePageContent> = {
     heroHeadline: "A Site Fast Enough to Rank, Sharp Enough to Convert",
     heroSubline:
       "Most trade-business websites are built once and forgotten. We build ones engineered to load fast, read clearly on a job-site phone, and actually turn a visit into an enquiry.",
+    metaDescription:
+      "Custom-built, fast-loading websites for trade businesses — engineered to rank and designed to convert. See what's included, our process, and real work.",
     includedIntro:
       "A website is judged in seconds. Here's everything that goes into making those seconds work in your favour.",
     included: [
@@ -221,6 +226,8 @@ export const SERVICE_PAGES: Record<ServiceSlug, ServicePageContent> = {
     heroHeadline: "A Catalogue Built to Be Picked Up, Not Skimmed",
     heroSubline:
       "Menus, lookbooks, product catalogues — the print pieces that carry your business into someone's hands. We design them to hold attention as long as the products deserve.",
+    metaDescription:
+      "Menus, lookbooks and product catalogues designed to be picked up, not skimmed — print-ready and digital-ready. See what's included and real catalogue work.",
     includedIntro:
       "Print doesn't get a second chance the way a website does — every page has to earn the turn to the next one. Here's what goes into that.",
     included: [
@@ -314,6 +321,8 @@ export const SERVICE_PAGES: Record<ServiceSlug, ServicePageContent> = {
     heroHeadline: "Visibility That Compounds, Not Fades in a Month",
     heroSubline:
       "Buyers search before they ask for referrals. If you're not visible when they do, you're not in the conversation — regardless of how good the work is once they find you.",
+    metaDescription:
+      "Technical SEO, on-page optimisation and growth reporting for trade businesses that want to be found by buyers who are already searching for them.",
     includedIntro:
       "SEO is a lot of small, correct decisions compounding over time. Here's what that actually involves.",
     included: [
@@ -407,6 +416,8 @@ export const SERVICE_PAGES: Record<ServiceSlug, ServicePageContent> = {
     heroHeadline: "A Presence That Reflects the Business Behind It",
     heroSubline:
       "Most trade-business social accounts are inconsistent, outdated, or an afterthought. We build and run a presence that actually closes deals, not just collects impressions.",
+    metaDescription:
+      "Social media strategy, content and paid campaigns for trade businesses that want a presence which actually reflects the work they do. See what's included.",
     includedIntro:
       "Social media for a trade business is a credibility check, not a popularity contest. Here's what a properly run presence involves.",
     included: [
