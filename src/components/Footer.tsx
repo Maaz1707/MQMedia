@@ -15,7 +15,7 @@ export default function Footer() {
             <Logo size={96} />
             <p className="mt-5 text-sm leading-relaxed text-muted">
               Branding, web development, catalogue design, SEO and social
-              media management for ambitious trade businesses worldwide.
+              media management {SITE_CONFIG.regionDescriptor}.
             </p>
           </div>
 

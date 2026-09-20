@@ -23,8 +23,7 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["500", "600", "700"],
 });
 
-const SITE_DESCRIPTION =
-  "MQ Media is a design and growth studio for trade businesses — branding, web development, catalogue design, SEO and social media management.";
+const SITE_DESCRIPTION = `MQ Media is a design and growth studio ${SITE_CONFIG.regionDescriptor} — branding, web development, catalogue design, SEO and social media management.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.siteUrl),

@@ -31,3 +31,17 @@ fix number from the audit. Resolve these before this goes live.
 - [ ] Confirm the "within one business day" response-time promise in
       the Contact section is one you can actually keep. If not, set
       `NEXT_PUBLIC_SHOW_RESPONSE_TIME_PROMISE=false`.
+
+## Fix 7 — Positioning & copy
+- [ ] Confirm "for trade businesses across India and the GCC"
+      (`NEXT_PUBLIC_REGION_DESCRIPTOR`) is the region you actually want
+      to claim — adjust the env var if it's narrower or wider than that.
+- [ ] **REVIEW** (also marked `// REVIEW:` in `About.tsx`): I added a line
+      explaining that specialised work (paid social, print production)
+      is "coordinated by" Maaz rather than fully outsourced or done
+      entirely solo. Correct this if it doesn't match how work is
+      actually delivered — this is a factual claim about your operation,
+      not something I can verify.
+- [ ] Confirm "a computer engineer" (replacing "a final-year engineering
+      student") in the About section still reads as accurate for where
+      you are now.

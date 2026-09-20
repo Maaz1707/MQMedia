@@ -51,6 +51,13 @@ export const SITE_CONFIG = {
   // commitment, not filler copy — default on, but a single env flag turns
   // it off everywhere if that response time ever stops being true.
   showResponseTimePromise: process.env.NEXT_PUBLIC_SHOW_RESPONSE_TIME_PROMISE !== "false",
+  // Single source of truth for the region positioning — was hardcoded as
+  // "Worldwide" in the hero eyebrow, meta description and footer, which
+  // overstates reach for a solo-founder studio. Phrased as a fragment
+  // ("for trade businesses across India and the GCC") so it drops
+  // naturally into different sentences at each call site.
+  regionDescriptor:
+    process.env.NEXT_PUBLIC_REGION_DESCRIPTOR ?? "for trade businesses across India and the GCC",
 };
 
 export function whatsappLink(

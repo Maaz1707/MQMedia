@@ -6,6 +6,7 @@ import Magnetic from "@/components/Magnetic";
 import TextReveal from "@/components/TextReveal";
 import ParticleConstellation from "@/components/ParticleConstellation";
 import { INTRO_TOTAL_S } from "@/lib/motion";
+import { SITE_CONFIG } from "@/lib/site-config";
 
 const container = {
   hidden: {},
@@ -50,7 +51,7 @@ export default function Hero() {
         animate="visible"
       >
         <motion.p variants={item} className="text-xs uppercase tracking-[0.35em] text-gold">
-          A Design &amp; Growth Studio, Worldwide
+          A Design &amp; Growth Studio {SITE_CONFIG.regionDescriptor}
         </motion.p>
 
         <h1 className="font-display text-gradient-gold mx-auto mt-7 max-w-5xl text-5xl font-medium leading-[1.15] md:text-7xl">
