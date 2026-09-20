@@ -15,8 +15,6 @@ import { SITE_CONFIG } from "@/lib/site-config";
 
 type Params = { slug: string };
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mqmedia.com";
-
 export function generateStaticParams(): Params[] {
   return SERVICES.map((s) => ({ slug: s.slug }));
 }
@@ -31,7 +29,7 @@ export async function generateMetadata({
   const content = servicePageForSlug(slug);
   if (!service || !content) return {};
 
-  const pageUrl = `${BASE_URL}/services/${slug}`;
+  const pageUrl = `${SITE_CONFIG.siteUrl}/services/${slug}`;
 
   return {
     title: service.title,
@@ -62,7 +60,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   }
 
   const relatedProjects = projectsForService(slug as ServiceSlug);
-  const pageUrl = `${BASE_URL}/services/${slug}`;
+  const pageUrl = `${SITE_CONFIG.siteUrl}/services/${slug}`;
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -74,7 +72,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
     provider: {
       "@type": "ProfessionalService",
       name: SITE_CONFIG.name,
-      url: BASE_URL,
+      url: SITE_CONFIG.siteUrl,
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",

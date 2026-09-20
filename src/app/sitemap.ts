@@ -1,11 +1,10 @@
 import type { MetadataRoute } from "next";
 import { SERVICES } from "@/lib/services-data";
-
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mqmedia.com";
+import { SITE_CONFIG } from "@/lib/site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const servicePages: MetadataRoute.Sitemap = SERVICES.map((s) => ({
-    url: `${BASE_URL}/services/${s.slug}`,
+    url: `${SITE_CONFIG.siteUrl}/services/${s.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.8,
@@ -13,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: BASE_URL,
+      url: SITE_CONFIG.siteUrl,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,

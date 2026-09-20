@@ -1,6 +1,25 @@
 // Central place for contact details & social links.
 // TODO: replace placeholder values with MQ Media's real details before launch.
 
+// Resolution order: an explicit real domain always wins; otherwise fall
+// back to whatever Vercel URL this deployment actually has (production
+// domain first, then the per-deployment URL), so canonical/OG links are
+// never wrong just because the custom domain isn't wired up yet. Only
+// falls back to the mqmedia.com literal when none of that is available
+// (i.e. local dev with no env vars set at all).
+function resolveSiteUrl(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicit) return explicit.replace(/\/+$/, "");
+
+  const vercelProductionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  if (vercelProductionUrl) return `https://${vercelProductionUrl}`;
+
+  const vercelUrl = process.env.VERCEL_URL;
+  if (vercelUrl) return `https://${vercelUrl}`;
+
+  return "https://mqmedia.com";
+}
+
 function isPlaceholderNumber(value: string): boolean {
   return value.trim() === "" || /^0+$/.test(value.trim());
 }
@@ -19,6 +38,7 @@ if (!whatsappNumberIsReal && typeof window === "undefined") {
 export const SITE_CONFIG = {
   name: "MQ Media",
   tagline: "Where Vision Meets Precision",
+  siteUrl: resolveSiteUrl(),
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@mqmedia.com",
   // Empty string when unset/placeholder — never render a fake WhatsApp link.
   whatsappNumber: whatsappNumberIsReal ? rawWhatsappNumber.trim() : "",

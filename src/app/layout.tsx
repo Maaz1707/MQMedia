@@ -10,6 +10,7 @@ import PageIntro from "@/components/PageIntro";
 import AmbientBackground from "@/components/AmbientBackground";
 import GrainOverlay from "@/components/GrainOverlay";
 import { SITE_CONFIG } from "@/lib/site-config";
+import { SERVICES } from "@/lib/services-data";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -22,12 +23,11 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["500", "600", "700"],
 });
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mqmedia.com";
 const SITE_DESCRIPTION =
-  "MQ Media is a design and growth studio for trade businesses worldwide — branding, web development, catalogue design, SEO and social media management.";
+  "MQ Media is a design and growth studio for trade businesses — branding, web development, catalogue design, SEO and social media management.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
+  metadataBase: new URL(SITE_CONFIG.siteUrl),
   title: {
     default: "MQ Media | Where Vision Meets Precision",
     template: "%s | MQ Media",
@@ -40,13 +40,12 @@ export const metadata: Metadata = {
     "catalogue design",
     "SEO",
     "SMMA",
-    "social media marketing",
-    "global trade business branding",
+    "trade business branding",
   ],
   openGraph: {
     title: "MQ Media | Where Vision Meets Precision",
     description: SITE_DESCRIPTION,
-    url: BASE_URL,
+    url: SITE_CONFIG.siteUrl,
     siteName: "MQ Media",
     type: "website",
   },
@@ -57,21 +56,29 @@ export const metadata: Metadata = {
   },
 };
 
+// Organization + Service: the business entity plus what it offers, built
+// only from siteConfig/services data — no field here is invented, and
+// anything unset (social links, phone, address) is simply omitted rather
+// than rendered empty, since empty structured-data fields are worse than
+// absent ones for search engines.
+const socialLinks = Object.values(SITE_CONFIG.social).filter(Boolean);
+
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": ["Organization", "ProfessionalService"],
   name: SITE_CONFIG.name,
   description: SITE_DESCRIPTION,
-  url: BASE_URL,
+  url: SITE_CONFIG.siteUrl,
   email: SITE_CONFIG.contactEmail,
-  areaServed: "Worldwide",
-  makesOffer: [
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Branding & Identity" } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Design & Development" } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Catalogue & Print Design" } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "SEO & Growth Marketing" } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Social Media Marketing & Management" } },
-  ],
+  ...(socialLinks.length > 0 ? { sameAs: socialLinks } : {}),
+  makesOffer: SERVICES.map((service) => ({
+    "@type": "Offer",
+    itemOffered: {
+      "@type": "Service",
+      name: service.title,
+      url: `${SITE_CONFIG.siteUrl}/services/${service.slug}`,
+    },
+  })),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
