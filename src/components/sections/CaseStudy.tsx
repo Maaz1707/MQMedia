@@ -5,6 +5,7 @@ import Reveal from "@/components/Reveal";
 import TiltCard from "@/components/TiltCard";
 import BrowserMockup from "@/components/BrowserMockup";
 import CatalogueMockup from "@/components/CatalogueMockup";
+import type { Testimonial } from "@/lib/portfolio-data";
 
 export type Mockup = {
   type: "browser" | "catalogue";
@@ -17,6 +18,10 @@ type CaseStudyProps = {
   category: string;
   caption: string;
   mockups: Mockup[];
+  industry?: string;
+  outcome?: string;
+  testimonial?: Testimonial;
+  liveUrl?: string;
   reversed?: boolean;
   onOpen: (layoutId: string, mockup: Mockup) => void;
 };
@@ -26,6 +31,10 @@ export default function CaseStudy({
   category,
   caption,
   mockups,
+  industry,
+  outcome,
+  testimonial,
+  liveUrl,
   reversed = false,
   onOpen,
 }: CaseStudyProps) {
@@ -73,13 +82,52 @@ export default function CaseStudy({
       </div>
 
       <Reveal delay={0.1}>
-        <p className="text-xs uppercase tracking-[0.2em] text-gold">
-          {category}
-        </p>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <p className="text-xs uppercase tracking-[0.2em] text-gold">{category}</p>
+          {industry && (
+            <>
+              <span className="text-border" aria-hidden="true">
+                &middot;
+              </span>
+              <p className="text-xs uppercase tracking-[0.2em] text-muted">{industry}</p>
+            </>
+          )}
+        </div>
         <h3 className="font-display mt-3 text-3xl text-foreground md:text-4xl">
           {name}
         </h3>
         <p className="mt-4 text-lg leading-relaxed text-muted">{caption}</p>
+
+        {outcome && (
+          <p className="mt-5 border-l-2 border-gold/50 pl-4 text-base leading-relaxed text-foreground/80">
+            {outcome}
+          </p>
+        )}
+
+        {testimonial && (
+          <blockquote className="mt-6 border border-border bg-surface/40 p-6">
+            <p className="text-base italic leading-relaxed text-foreground/90">
+              &ldquo;{testimonial.quote}&rdquo;
+            </p>
+            <footer className="mt-3 text-xs uppercase tracking-[0.15em] text-muted">
+              {testimonial.name}
+              {testimonial.role ? `, ${testimonial.role}` : ""}
+            </footer>
+          </blockquote>
+        )}
+
+        {liveUrl && (
+          <a
+            href={liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor-hover
+            className="mt-6 inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] text-gold-dark transition-colors duration-300 hover:text-gold"
+          >
+            Visit Live Site
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        )}
       </Reveal>
     </div>
   );

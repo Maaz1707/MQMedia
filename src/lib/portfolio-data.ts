@@ -1,13 +1,33 @@
 import type { Mockup } from "@/components/sections/CaseStudy";
 import type { ServiceSlug } from "@/lib/services-data";
 
+export type Testimonial = { quote: string; name: string; role: string };
+
 export type Project = {
+  // Client name.
   name: string;
+  // Human-readable scope label shown on the card (e.g. "Catalogue &
+  // Website Design") — this already doubles as the "what MQ did" scope
+  // line the audit asked for; services[] below is the structured,
+  // filterable version of the same thing.
   category: string;
   caption: string;
   mockups: Mockup[];
-  // Which service pages this project is relevant proof for.
+  // Which service pages this project is relevant proof for — also the
+  // structured discipline list for this project.
   services: ServiceSlug[];
+  // Only set when it's directly inferable from existing, already-public
+  // copy about the project (not guessed) — e.g. AIM Hitech's caption
+  // already says "precision engineering". Left unset rather than guessed
+  // where it isn't obvious (e.g. Chopdar, Bestech).
+  industry?: string;
+  // None of the below exist for any current project — no real outcome
+  // metrics or client quotes have been provided, so nothing is invented.
+  // Set these later as real ones come in; the UI only renders a block
+  // when the data is actually present.
+  outcome?: string;
+  testimonial?: Testimonial;
+  liveUrl?: string;
 };
 
 export const PROJECTS: Project[] = [
@@ -17,6 +37,7 @@ export const PROJECTS: Project[] = [
     caption: "A menu built to be picked up, not skimmed.",
     mockups: [{ type: "catalogue", alt: "Bae Laban Menu" }],
     services: ["catalogue-design"],
+    industry: "Food & Beverage",
   },
   {
     name: "Chopdar",
@@ -44,6 +65,7 @@ export const PROJECTS: Project[] = [
       { type: "browser", alt: "AIM Hitech Website" },
     ],
     services: ["catalogue-design", "web-development"],
+    industry: "Engineering & Manufacturing",
   },
   // Add more projects here as they're completed.
 ];
